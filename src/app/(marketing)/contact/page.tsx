@@ -10,6 +10,37 @@ const contactReasons = [
   "Just exploring",
 ];
 
+const contactDetails = [
+  {
+    label: "Email",
+    value: "hello@hybertec.com",
+    href: "mailto:hello@hybertec.com",
+  },
+  {
+    label: "Location",
+    value: "Gwinnett County, Georgia",
+    href: null,
+  },
+  {
+    label: "Response Time",
+    value: "Within 1 business day",
+    href: null,
+  },
+];
+
+const expectations = [
+  "We review your message and respond within 1 business day.",
+  "If it's a good fit, we schedule a free 30-min discovery call.",
+  "We put together a clear scope and plan — no surprise costs.",
+  "We get to work.",
+];
+
+const inputClass =
+  "w-full px-4 py-3 rounded-xl bg-bg/40 border border-border text-cream font-body text-sm placeholder-cream-muted/50 focus:outline-none focus:border-lime/50 transition-colors";
+
+const labelClass =
+  "block font-body text-xs text-cream-muted tracking-widest uppercase mb-2";
+
 export default function ContactPage() {
   const [selected, setSelected] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -27,7 +58,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-3 mb-6">
             <span className="w-5 h-px bg-lime" />
-            <span className="section-label">Contact</span>
+            <span className="section-label">Start a Project</span>
           </div>
           <h1 className="font-display text-5xl font-bold leading-tight text-cream mb-4 md:text-6xl">
             Let's talk about
@@ -35,68 +66,51 @@ export default function ContactPage() {
             your <span className="text-lime italic">next build.</span>
           </h1>
           <p className="font-body text-cream-muted text-lg max-w-md leading-relaxed">
-            Fill out the form below or email us directly. We respond to every
+            Tell us a bit about what you're working on. We respond to every
             inquiry within one business day.
           </p>
         </div>
       </section>
 
-      <section className="py-24">
+      <section className="py-16">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-12">
             {/* Left — contact details */}
-            <div>
-              <div className="space-y-6 mb-10">
-                {[
-                  {
-                    label: "Email",
-                    value: "hello@hybertec.com",
-                    href: "mailto:hello@hybertec.com",
-                  },
-                  {
-                    label: "Location",
-                    value: "Gwinnett County, Georgia",
-                    href: null,
-                  },
-                  {
-                    label: "Response Time",
-                    value: "Within 1 business day",
-                    href: null,
-                  },
-                ].map((item) => (
-                  <div key={item.label} className="flex items-start gap-4">
-                    <span className="w-1.5 h-1.5 rounded-full bg-lime mt-2 flex-shrink-0" />
-                    <div>
-                      <p className="font-body text-xs text-cream-muted tracking-widest uppercase mb-1">
-                        {item.label}
-                      </p>
-                      {item.href ? (
-                        <a
-                          href={item.href}
-                          className="font-body text-base text-cream hover:text-lime transition-colors"
-                        >
-                          {item.value}
-                        </a>
-                      ) : (
-                        <p className="font-body text-base text-cream">{item.value}</p>
-                      )}
+            <div className="space-y-6">
+              <div className="rounded-2xl bg-surface border border-border p-6">
+                <h3 className="font-display text-base font-bold text-cream mb-5">
+                  Direct contact
+                </h3>
+                <div className="space-y-5">
+                  {contactDetails.map((item) => (
+                    <div key={item.label} className="flex items-start gap-4">
+                      <span className="w-1.5 h-1.5 rounded-full bg-lime mt-2 flex-shrink-0" />
+                      <div>
+                        <p className={labelClass + " mb-1"}>{item.label}</p>
+                        {item.href ? (
+                          <a
+                            href={item.href}
+                            className="font-body text-base text-cream hover:text-lime transition-colors"
+                          >
+                            {item.value}
+                          </a>
+                        ) : (
+                          <p className="font-body text-base text-cream">
+                            {item.value}
+                          </p>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
 
-              {/* What to expect */}
-              <div className="p-6 rounded-2xl bg-surface border border-border">
-                <h3 className="font-display mb-4 text-base font-bold text-cream">
+              <div className="rounded-2xl bg-surface border border-border p-6">
+                <h3 className="font-display text-base font-bold text-cream mb-5">
                   What happens after you reach out?
                 </h3>
                 <ol className="space-y-3">
-                  {[
-                    "We review your message and respond within 1 business day.",
-                    "If it's a good fit, we schedule a free 30-min discovery call.",
-                    "We put together a clear scope and plan — no surprise costs.",
-                    "We get to work.",
-                  ].map((step, i) => (
+                  {expectations.map((step, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <span className="mt-0.5 flex-shrink-0 font-display text-sm font-bold text-lime">
                         {String(i + 1).padStart(2, "0")}
@@ -119,78 +133,94 @@ export default function ContactPage() {
                     Message received.
                   </h3>
                   <p className="font-body text-cream-muted text-sm max-w-xs">
-                    Thanks for reaching out. We'll be in touch within one business day.
+                    Thanks for reaching out. We'll be in touch within one
+                    business day.
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  {/* Name + Email */}
+                <form
+                  onSubmit={handleSubmit}
+                  className="rounded-2xl bg-surface border border-border p-6 md:p-8 space-y-5"
+                >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block font-body text-xs text-cream-muted tracking-widest uppercase mb-2">
+                      <label htmlFor="name" className={labelClass}>
                         Name *
                       </label>
                       <input
+                        id="name"
+                        name="name"
                         type="text"
                         required
                         placeholder="Jane Smith"
-                        className="w-full px-4 py-3 rounded-xl bg-surface border border-border text-cream font-body text-sm placeholder-cream-muted/50 focus:outline-none focus:border-lime/50 transition-colors"
+                        className={inputClass}
                       />
                     </div>
                     <div>
-                      <label className="block font-body text-xs text-cream-muted tracking-widest uppercase mb-2">
+                      <label htmlFor="email" className={labelClass}>
                         Email *
                       </label>
                       <input
+                        id="email"
+                        name="email"
                         type="email"
                         required
                         placeholder="jane@company.com"
-                        className="w-full px-4 py-3 rounded-xl bg-surface border border-border text-cream font-body text-sm placeholder-cream-muted/50 focus:outline-none focus:border-lime/50 transition-colors"
+                        className={inputClass}
                       />
                     </div>
                   </div>
 
-                  {/* Business */}
                   <div>
-                    <label className="block font-body text-xs text-cream-muted tracking-widest uppercase mb-2">
+                    <label htmlFor="business" className={labelClass}>
                       Business / Organization
                     </label>
                     <input
+                      id="business"
+                      name="business"
                       type="text"
                       placeholder="Your Business LLC"
-                      className="w-full px-4 py-3 rounded-xl bg-surface border border-border text-cream font-body text-sm placeholder-cream-muted/50 focus:outline-none focus:border-lime/50 transition-colors"
+                      className={inputClass}
                     />
                   </div>
 
-                  {/* Reason */}
                   <div>
-                    <label className="block font-body text-xs text-cream-muted tracking-widest uppercase mb-2">
+                    <span className={labelClass}>
                       What are you looking for? *
-                    </label>
+                    </span>
+                    <input type="hidden" name="reason" value={selected} />
                     <div className="flex flex-wrap gap-2">
-                      {contactReasons.map((reason) => (
-                        <button
-                          key={reason}
-                          type="button"
-                          onClick={() => setSelected(reason)}
-                          className={`px-3.5 py-2 rounded-xl border text-sm font-body transition-all ${
-                            selected === reason
-                              ? "border-lime bg-lime/10 text-lime"
-                              : "border-border text-cream-muted hover:border-lime/30 hover:text-cream"
-                          }`}
-                        >
-                          {reason}
-                        </button>
-                      ))}
+                      {contactReasons.map((reason) => {
+                        const active = selected === reason;
+                        return (
+                          <button
+                            key={reason}
+                            type="button"
+                            onClick={() => setSelected(reason)}
+                            aria-pressed={active}
+                            className={`px-3.5 py-1.5 rounded-full border text-sm font-body transition-all ${
+                              active
+                                ? "border-lime bg-lime/10 text-lime"
+                                : "border-border text-cream-muted hover:border-lime/30 hover:text-cream"
+                            }`}
+                          >
+                            {reason}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
 
-                  {/* Budget */}
                   <div>
-                    <label className="block font-body text-xs text-cream-muted tracking-widest uppercase mb-2">
+                    <label htmlFor="budget" className={labelClass}>
                       Monthly Budget
                     </label>
-                    <select className="w-full px-4 py-3 rounded-xl bg-surface border border-border text-cream font-body text-sm focus:outline-none focus:border-lime/50 transition-colors">
+                    <select
+                      id="budget"
+                      name="budget"
+                      defaultValue=""
+                      className={inputClass}
+                    >
                       <option value="">Select a range...</option>
                       <option>Under $300/mo</option>
                       <option>$300 – $700/mo</option>
@@ -200,23 +230,21 @@ export default function ContactPage() {
                     </select>
                   </div>
 
-                  {/* Message */}
                   <div>
-                    <label className="block font-body text-xs text-cream-muted tracking-widest uppercase mb-2">
+                    <label htmlFor="message" className={labelClass}>
                       Tell us about your project *
                     </label>
                     <textarea
+                      id="message"
+                      name="message"
                       required
                       rows={5}
                       placeholder="What does your business do, what are you trying to achieve online, and what's your timeline?"
-                      className="w-full px-4 py-3 rounded-xl bg-surface border border-border text-cream font-body text-sm placeholder-cream-muted/50 focus:outline-none focus:border-lime/50 transition-colors resize-none"
+                      className={`${inputClass} resize-none`}
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    className="w-full rounded-xl bg-lime py-3.5 text-base font-semibold text-bg transition-colors hover:bg-lime-dim"
-                  >
+                  <button type="submit" className="button-primary w-full py-3.5">
                     Send Message
                   </button>
                 </form>
