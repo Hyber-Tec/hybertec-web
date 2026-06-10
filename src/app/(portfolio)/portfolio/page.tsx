@@ -3,7 +3,6 @@ import { SectionHeader } from "@/components/shared/SectionHeader";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Portfolio",
   description:
     "Case studies from web development projects across home services, real estate, e-commerce, and professional services.",
 };

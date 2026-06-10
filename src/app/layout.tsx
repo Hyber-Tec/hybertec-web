@@ -11,10 +11,7 @@ const socialImagePath = isGitHubPages
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: {
-    default: "HyberTec | Websites and Software for Growing Businesses",
-    template: "%s | HyberTec",
-  },
+  title: "HyberTec LLC",
   description:
     "We help businesses handle freelance requests with a reliable partner for websites, software builds, and ongoing product support.",
   keywords: ["web development", "software agency", "business websites", "custom web apps", "freelance partner"],

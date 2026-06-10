@@ -4,7 +4,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Services",
   description:
     "Websites, custom software, and ongoing support from HyberTec. Clear scope, modern builds, and no surprise invoices.",
 };
