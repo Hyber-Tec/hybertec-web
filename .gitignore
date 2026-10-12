@@ -1,17 +1,32 @@
-node_modules/
-.next/
-out/
-dist/
-coverage/
+# dependencies
+/node_modules
 
-tsconfig.tsbuildinfo
+# next.js
+/.next/
+/out/
+/build
+/dist
+next-env.d.ts
 
+# testing
+/coverage
+/test-results
+/playwright-report
+
+# typescript
+*.tsbuildinfo
+
+# env files
 .env
 .env.*
 !.env.example
 
+# misc
 .DS_Store
+*.pem
+npm-debug.log*
 
+# local tooling
 .codex
 id_ed25520
 id_ed25520.pub
