@@ -11,6 +11,14 @@ import { site } from "./site";
 /** A paragraph, or a bulleted list when it's an array. */
 export type LegalBlock = string | string[];
 
+/**
+ * Starts a paragraph that is a question only the founders can answer. The
+ * page shows it highlighted, and a production build refuses to publish a page
+ * that still has one (components/legal-page.tsx): replace the whole paragraph
+ * with the answer.
+ */
+export const FOUNDERS_TO_DECIDE = "[FOUNDERS TO DECIDE]";
+
 export type LegalSection = {
   /** Anchor, e.g. /refunds/#cancelling */
   id: string;
@@ -411,7 +419,7 @@ export const refunds: LegalDoc = {
       id: "setup-fees",
       title: "Setup fees",
       body: [
-        "Setup fees cover work that begins right away. Once that work has started, they are refundable only as your agreement says.",
+        `${FOUNDERS_TO_DECIDE} Is a paid setup fee refundable if a client cancels early (for example, before the work is finished, or in the first months)? Not decided yet. Write the answer here before this page is published.`,
       ],
     },
     {

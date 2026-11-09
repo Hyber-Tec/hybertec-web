@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { enterDelay } from "@/components/motion/enter-text";
 import { PageHeader } from "@/components/page-header";
 import { SmartLink } from "@/components/smart-link";
-import type { LegalDoc } from "@/content/legal";
+import { FOUNDERS_TO_DECIDE, type LegalDoc } from "@/content/legal";
 import { cn } from "@/lib/utils";
 
 const updatedFormat = new Intl.DateTimeFormat("en-US", { dateStyle: "long", timeZone: "UTC" });
@@ -12,6 +12,11 @@ const number = (i: number) => String(i + 1).padStart(2, "0");
 
 /** Shared layout for /terms/, /privacy/ and /refunds/. The copy lives in content/legal.ts. */
 export function LegalPage({ doc }: { doc: LegalDoc }) {
+  // A question still open for the founders must never go live: the production build stops here.
+  const open = doc.sections.flatMap((s) => s.body).filter((b) => typeof b === "string" && b.startsWith(FOUNDERS_TO_DECIDE));
+  if (open.length > 0 && process.env.NODE_ENV === "production") {
+    throw new Error(`"${doc.title.join(" ")}" still has ${open.length} question(s) for the founders (${FOUNDERS_TO_DECIDE} in src/content/legal.ts). Answer them before publishing.`);
+  }
   return (
     <>
       <PageHeader label="Legal" title={doc.title} description={<Inline text={doc.intro} />}>
@@ -62,7 +67,7 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
                     <div className="mt-5 space-y-4 text-base leading-relaxed text-muted-foreground">
                       {section.body.map((block, j) =>
                         typeof block === "string" ? (
-                          <p key={j}>
+                          <p key={j} className={cn(block.startsWith(FOUNDERS_TO_DECIDE) && "rounded-md border border-amber-500 bg-amber-100 p-3 font-medium text-amber-950")}>
                             <Inline text={block} />
                           </p>
                         ) : (
