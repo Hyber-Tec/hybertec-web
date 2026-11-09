@@ -6,7 +6,7 @@ export const site = {
   legalName: "HyberTec LLC",
   url: "https://www.hybertec.com",
   email: "hello@hybertec.com",
-  billingEmail: "hybertecofficial@gmail.com",
+  billingEmail: "billing@hybertec.com",
   location: "Gwinnett County, Georgia",
   locationShort: "Georgia, USA",
   founded: 2026,
