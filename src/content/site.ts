@@ -6,6 +6,7 @@ export const site = {
   legalName: "HyberTec LLC",
   url: "https://www.hybertec.com",
   email: "hello@hybertec.com",
+  billingEmail: "billing@hybertec.com",
   location: "Gwinnett County, Georgia",
   locationShort: "Georgia, USA",
   founded: 2026,
@@ -24,4 +25,11 @@ export const mainNav: NavItem[] = [
   { label: "Studio", href: "/#studio" },
   { label: "Process", href: "/#process" },
   { label: "FAQ", href: "/#faq" },
+];
+
+/** Small links in the footer's bottom bar. Page copy lives in content/legal.ts. */
+export const legalNav: NavItem[] = [
+  { label: "Terms", href: "/terms/" },
+  { label: "Privacy", href: "/privacy/" },
+  { label: "Refunds", href: "/refunds/" },
 ];

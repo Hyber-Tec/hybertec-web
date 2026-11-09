@@ -32,7 +32,7 @@ npm run lint && npm run typecheck
 
 ```
 src/
-├── app/                    # Routes: / · /work · /work/[slug] · /contact · 404, sitemap, robots, icons
+├── app/                    # Routes: / · /work · /work/[slug] · /contact · /terms · /privacy · /refunds · 404, sitemap, robots, icons
 ├── components/
 │   ├── brand/              # Official mark (mark-path.ts), logo lockup, intro reveal, liquid-chrome hero mark
 │   ├── sections/           # Homepage sections (hero, work, services, studio, process, …)
@@ -46,6 +46,7 @@ src/
 │   ├── home.ts             # Homepage copy: hero, studio, process, engagement models, FAQ
 │   ├── services.ts         # Service catalog
 │   ├── projects.ts         # Portfolio
+│   ├── legal.ts            # Terms, privacy and refunds pages (bump `updated` when the text changes)
 │   └── stack.ts            # Technology marquee
 scripts/
 ├── capture-screenshots.ts  # npm run capture — portfolio screenshots from live sites

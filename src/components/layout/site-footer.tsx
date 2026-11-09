@@ -6,7 +6,7 @@ import { BackToTop } from "@/components/layout/back-to-top";
 import { FooterWordmark } from "@/components/layout/footer-wordmark";
 import { SmartLink } from "@/components/smart-link";
 import { services } from "@/content/services";
-import { mainNav, site } from "@/content/site";
+import { legalNav, mainNav, site } from "@/content/site";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -78,11 +78,24 @@ export function SiteFooter() {
         </div>
 
         <div className="flex flex-col gap-4 border-t border-hairline py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {year} {site.legalName}. All rights reserved.
-          </p>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+            <p>
+              © {year} {site.legalName}. All rights reserved.
+            </p>
+            <nav aria-label="Legal">
+              <ul className="flex gap-5">
+                {legalNav.map((item) => (
+                  <li key={item.href}>
+                    <SmartLink href={item.href} className="transition-colors hover:text-foreground">
+                      {item.label}
+                    </SmartLink>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
           <div className="flex items-center justify-between gap-6">
-            <span className="hidden font-mono tracking-wider uppercase md:inline">Designed &amp; engineered in-house</span>
+            <span className="hidden font-mono tracking-wider uppercase lg:inline">Designed &amp; engineered in-house</span>
             <BackToTop />
           </div>
         </div>
