@@ -230,7 +230,7 @@ export const privacy: LegalDoc = {
     "What personal data HyberTec collects through hybertec.com and the billing portal, why, who processes it and how to ask us to see, correct or delete it.",
   intro:
     "What we collect, why we collect it and what you can ask us to do with it. This policy covers this website and our billing portal.",
-  updated: "2026-11-09",
+  updated: "2026-11-10",
   summary: [
     "This website uses no cookies, analytics or ads.",
     "Card and bank details go straight to Stripe. We never see your full card or bank account number.",

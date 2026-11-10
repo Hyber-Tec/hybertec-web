@@ -7,7 +7,7 @@ export const site = {
   url: "https://www.hybertec.com",
   email: "hello@hybertec.com",
   billingEmail: "billing@hybertec.com",
-  location: "Gwinnett County, Georgia",
+  location: "Cumming, Georgia",
   locationShort: "Georgia, USA",
   founded: 2026,
   responseTime: "1 business day",

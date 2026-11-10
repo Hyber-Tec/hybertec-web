@@ -182,7 +182,7 @@ export const faqs = [
   },
   {
     q: "Where are you located?",
-    a: "We're a registered Georgia LLC based in Gwinnett County, metro Atlanta. We work with clients across the US remotely, and meet in person locally when it helps.",
+    a: "We're a registered Georgia LLC based in Cumming, Georgia. We work with clients across the US remotely, and meet in person locally when it helps.",
   },
 ];
 
