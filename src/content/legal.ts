@@ -117,7 +117,7 @@ export const terms: LegalDoc = {
       title: "Prices and payments",
       body: [
         quotedPrices,
-        "Our plans have a one-time setup fee and a monthly subscription.",
+        "The billing portal charges a monthly subscription. One-time project fees aren't billed there: your own agreement with us covers them.",
         "Your billing day is the day of the month you paid your first invoice. We charge the monthly subscription automatically on that day each month until the plan is cancelled. By starting a plan, you authorize these charges.",
         "Payments are processed by Stripe. You can pay by card, including Apple Pay and Google Pay, or by US bank account debit (ACH).",
         "You enter card and bank details only on Stripe's pages. We never see or store your full card or bank account number.",
@@ -372,25 +372,24 @@ export const privacy: LegalDoc = {
 
 export const refunds: LegalDoc = {
   title: ["Refunds and", "cancellation."],
-  description: "How cancelling a HyberTec subscription works, how refunds are made and who to contact about a charge.",
+  description: "How cancelling your HyberTec subscription works, what happens to the month you've paid for, and how to ask for a refund.",
   intro:
-    "How to cancel a plan, what happens to the month you've paid for and how refunds work. If your signed agreement says something different, your agreement wins.",
-  updated: "2026-11-09",
+    "How to cancel your monthly subscription, what happens to the month you've paid for and how to ask for a refund. If your signed agreement says something different, your agreement wins.",
+  updated: "2026-11-10",
   summary: [
     "Cancel any time in the billing portal.",
-    "Your plan runs to the end of the month you've paid for. There's no partial refund for that month.",
+    "Your subscription runs to the end of the month you've paid for. There's no partial refund for that month.",
     "You can undo a cancellation until that month ends.",
-    "Refunds go back to your original payment method.",
-    `Questions about a charge? Email ${billing} before contacting your bank.`,
+    `Refunds are by request: email ${billing}.`,
+    "One-time project fees are covered by your own agreement with us, not billed here.",
   ],
   sections: [
     {
-      id: "how-plans-are-billed",
-      title: "How plans are billed",
+      id: "what-is-billed-here",
+      title: "What's billed here",
       body: [
         quotedPrices,
-        "Plans have a one-time setup fee and a monthly subscription. The subscription is charged automatically each month until it is cancelled.",
-        "It's charged on your billing day: the day of the month you paid your first invoice.",
+        "The billing portal charges your monthly subscription automatically on your billing day each month (the day of the month you paid your first invoice), until it's cancelled.",
         "We don't add card surcharges, and prices don't include taxes. If a tax ever applies, it's shown on your invoice.",
       ],
     },
@@ -410,27 +409,17 @@ export const refunds: LegalDoc = {
       id: "refunds",
       title: "Refunds",
       body: [
-        `To ask for a refund, email ${billing}. Tell us which payment it's about and why.`,
+        `Refunds are by request. Email ${billing} and tell us which payment it's about and why.`,
         "We review each request. A refund can be for all or part of a payment.",
         "Refunds go back to the original payment method. Card refunds usually take 5–10 business days to show on your statement.",
       ],
     },
     {
-      id: "setup-fees",
-      title: "Setup fees",
+      id: "project-fees",
+      title: "One-time project fees",
       body: [
-        `${FOUNDERS_TO_DECIDE} Is a paid setup fee refundable if a client cancels early (for example, before the work is finished, or in the first months)? Not decided yet. Write the answer here before this page is published.`,
+        "One-time project fees, such as building and setting up your platform, aren't billed through the billing portal. How they're paid, and whether any part can be refunded, is set out in your own agreement with HyberTec.",
       ],
-    },
-    {
-      id: "failed-payments",
-      title: "Failed payments",
-      body: failedPayments,
-    },
-    {
-      id: "price-changes",
-      title: "Price changes",
-      body: priceChanges,
     },
     {
       id: "questions-about-a-charge",
