@@ -71,7 +71,7 @@ export const terms: LegalDoc = {
     "The terms for using hybertec.com and the HyberTec billing portal, and for paying for HyberTec services. A signed client agreement comes first.",
   intro:
     "These terms cover this website, our billing portal and paying for our services. If you have a signed agreement with us, it comes first.",
-  updated: "2026-11-09",
+  updated: "2026-11-10",
   summary: [
     "Prices are quoted to each client in a written proposal or agreement. We don't list them on this website.",
     "If your signed agreement says something different from these terms, your agreement wins.",
