@@ -53,7 +53,7 @@ const failedPayments: LegalBlock[] = [
   "If a payment fails, Stripe tries again automatically:",
   [
     "Card payments are retried up to 8 times over about 2 weeks.",
-    "Bank debits are retried only if they failed for insufficient funds, and at most twice.",
+    "Bank debits that fail may also be retried automatically.",
   ],
   "Stripe also emails you a link to pay or to update your payment method.",
   "If the last retry fails, your subscription is marked unpaid. It is not cancelled. We'll contact you, and we may pause your service until the balance is paid.",
@@ -106,7 +106,7 @@ export const terms: LegalDoc = {
         "Please:",
         [
           "Keep your sign-in details safe, and don't share your account.",
-          `Tell us at ${hello} as soon as someone should no longer have access, for example when they leave your company.`,
+          `Tell us at ${billing} as soon as someone should no longer have access, for example when they leave your company.`,
           "Tell us right away if you think someone used your account without permission.",
         ],
         "We may remove access to an account to protect it, your data or the portal.",
@@ -219,7 +219,7 @@ export const terms: LegalDoc = {
     {
       id: "contact",
       title: "Contact us",
-      body: [[`Questions about these terms: ${hello}`, `Billing questions: ${billing}`], address],
+      body: [[`Questions about these terms: ${billing}`, `Billing questions: ${billing}`], address],
     },
   ],
 };
@@ -236,7 +236,7 @@ export const privacy: LegalDoc = {
     "Card and bank details go straight to Stripe. We never see your full card or bank account number.",
     "Our service providers are Google, Stripe and GitHub.",
     "We don't sell personal data.",
-    `You can ask us to see, correct or delete your data. Email ${hello}.`,
+    `You can ask us to see, correct or delete your data. Email ${billing}.`,
   ],
   sections: [
     {
@@ -328,7 +328,7 @@ export const privacy: LegalDoc = {
       id: "your-choices",
       title: "Your choices",
       body: [
-        `You can ask us to see, correct or delete the personal data we hold about you. Email ${hello}.`,
+        `You can ask us to see, correct or delete the personal data we hold about you. Email ${billing}.`,
         "We may need to confirm who you are first. We can't delete records the law requires us to keep, such as invoices and payment records.",
       ],
     },
@@ -338,7 +338,7 @@ export const privacy: LegalDoc = {
       body: [
         "Card and bank account numbers never reach our systems. They stay with Stripe.",
         "The billing portal is invite-only, and sign-in runs on Firebase Authentication.",
-        `No system is perfectly secure. If you notice anything wrong, tell us at ${hello}.`,
+        `No system is perfectly secure. If you notice anything wrong, tell us at ${billing}.`,
       ],
     },
     {
@@ -346,7 +346,7 @@ export const privacy: LegalDoc = {
       title: "Children",
       body: [
         "Our website and services are for businesses. They are not directed to children under 13, and we don't knowingly collect their personal data.",
-        `If you think a child has sent us personal data, email ${hello} and we'll delete it.`,
+        `If you think a child has sent us personal data, email ${billing} and we'll delete it.`,
       ],
     },
     {
@@ -365,7 +365,7 @@ export const privacy: LegalDoc = {
     {
       id: "contact",
       title: "Contact us",
-      body: [[`Privacy questions and requests: ${hello}`, `Billing questions: ${billing}`], address],
+      body: [[`Privacy questions and requests: ${billing}`, `Billing questions: ${billing}`], address],
     },
   ],
 };
