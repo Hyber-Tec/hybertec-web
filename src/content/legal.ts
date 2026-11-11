@@ -70,7 +70,7 @@ export const terms: LegalDoc = {
     "The terms for using hybertec.com and the HyberTec billing portal, and for paying for HyberTec services. A signed client agreement comes first.",
   intro:
     "These terms cover this website, our billing portal and paying for our services. If you have a signed agreement with us, it comes first.",
-  updated: "2026-11-10",
+  updated: "2026-11-11",
   summary: [
     "Prices are quoted to each client in a written proposal or agreement. We don't list them on this website.",
     "If your signed agreement says something different from these terms, your agreement wins.",
@@ -119,7 +119,7 @@ export const terms: LegalDoc = {
         "The billing portal charges a monthly subscription. One-time project fees aren't billed there: your own agreement with us covers them.",
         "Your billing day is the day of the month you paid your first invoice. We charge the monthly subscription automatically on that day each month until the plan is cancelled. By starting a plan, you authorize these charges.",
         "Payments are processed by Stripe. You can pay by card, including Apple Pay and Google Pay, or by US bank account debit (ACH).",
-        "You enter card and bank details only on Stripe's pages. We never see or store your full card or bank account number.",
+        "You enter card and bank details only into Stripe's secure payment fields, which appear on the billing portal's pages. We never see or store your full card or bank account number.",
         "We don't add card surcharges. You pay the price we quoted.",
         "Prices don't include taxes. If a tax ever applies, it will be shown on your invoice.",
       ],
@@ -133,7 +133,7 @@ export const terms: LegalDoc = {
       id: "cancelling",
       title: "Cancelling",
       body: [
-        "You can cancel your subscription at any time in the billing portal. Cancelling is handled by Stripe's customer portal.",
+        "You can cancel your subscription at any time in the billing portal.",
         "Your subscription ends at the end of the month you've already paid for. We don't give a partial refund for that month. Until it ends, you can undo the cancellation.",
         `We can also cancel it for you. Email ${billing}.`,
         agreementOnEnding,
@@ -229,7 +229,7 @@ export const privacy: LegalDoc = {
     "What personal data HyberTec collects through hybertec.com and the billing portal, why, who processes it and how to ask us to see, correct or delete it.",
   intro:
     "What we collect, why we collect it and what you can ask us to do with it. This policy covers this website and our billing portal.",
-  updated: "2026-11-10",
+  updated: "2026-11-11",
   summary: [
     "This website uses no cookies, analytics or ads.",
     "Card and bank details go straight to Stripe. We never see your full card or bank account number.",
@@ -283,7 +283,7 @@ export const privacy: LegalDoc = {
           "Emails we send you about your account and billing. We send them from Google Workspace (Gmail).",
           "A log of account and billing actions, kept for security and accounting.",
         ],
-        "You enter card and bank details only on Stripe's own pages (Stripe Checkout and Stripe's customer portal). We never see or store your full card or bank account number. See [Stripe's Privacy Policy](https://stripe.com/privacy).",
+        "You enter card and bank details only into Stripe's secure payment fields, which Stripe runs inside the billing portal's pages. We never see or store your full card or bank account number. To prevent fraud, Stripe also collects information about your device and how you use those fields, including with cookies. See [Stripe's Privacy Policy](https://stripe.com/privacy).",
         "Sign-in is handled by Google Firebase Authentication, whether you use Google, an emailed sign-in link or a password. Passwords are stored by Firebase, and we can't see them.",
         "The portal runs on Google Firebase (Authentication, Hosting, Cloud Functions and the Firestore database).",
       ],
@@ -396,7 +396,7 @@ export const refunds: LegalDoc = {
       id: "cancelling",
       title: "Cancelling your subscription",
       body: [
-        `Cancel any time in the billing portal at ${portal}. Cancelling is handled by Stripe's customer portal.`,
+        `Cancel any time in the billing portal at ${portal}.`,
         "Your subscription stays active until the end of the month you've already paid for. Then it ends, and you won't be charged again.",
         "We don't give a partial refund for the rest of that month.",
         "Changed your mind? You can undo the cancellation in the portal until the month ends.",
