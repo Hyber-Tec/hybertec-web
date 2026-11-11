@@ -71,7 +71,7 @@ Everything on the homepage showcase, `/work` and the case-study pages comes from
 
 ## Contact form
 
-The form posts to Web3Forms. Create a free access key at [web3forms.com](https://web3forms.com) for the inbox that should receive leads, then add it in GitHub → **Settings → Secrets and variables → Actions → Variables** as `WEB3FORMS_ACCESS_KEY`. Locally, put `NEXT_PUBLIC_WEB3FORMS_KEY=...` in `.env.local`. Without a key the form falls back to opening the visitor's email client addressed to `hello@hybertec.com`.
+The form posts to Web3Forms. Create a free access key at [web3forms.com](https://web3forms.com) for the inbox that should receive leads, then add it in GitHub → **Settings → Secrets and variables → Actions → Variables** as `WEB3FORMS_ACCESS_KEY`. Locally, put `NEXT_PUBLIC_WEB3FORMS_KEY=...` in `.env.local`. Without a key the form falls back to opening the visitor's email client addressed to `billing@hybertec.com`.
 
 ## Brand assets
 

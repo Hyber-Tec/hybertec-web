@@ -40,8 +40,7 @@ export type LegalDoc = {
   sections: LegalSection[];
 };
 
-const hello = `[${site.email}](mailto:${site.email})`;
-const billing = `[${site.billingEmail}](mailto:${site.billingEmail})`;
+const billing = `[${site.email}](mailto:${site.email})`;
 const portal = "billing.hybertec.com";
 const address = `${site.legalName}, ${site.location}, USA.`;
 
@@ -375,7 +374,7 @@ export const refunds: LegalDoc = {
   description: "How cancelling your HyberTec subscription works, what happens to the month you've paid for, and how to ask for a refund.",
   intro:
     "How to cancel your monthly subscription, what happens to the month you've paid for and how to ask for a refund. If your signed agreement says something different, your agreement wins.",
-  updated: "2026-11-10",
+  updated: "2026-11-11",
   summary: [
     "Cancel any time in the billing portal.",
     "Your subscription runs to the end of the month you've paid for. There's no partial refund for that month.",
@@ -432,7 +431,7 @@ export const refunds: LegalDoc = {
       id: "contact",
       title: "Contact us",
       body: [
-        [`Billing questions and refund requests: ${billing}`, `Everything else: ${hello}`],
+        `Billing questions, refund requests and anything else: ${billing}`,
         "These rules are also part of our [Terms of Service](/terms/).",
       ],
     },
