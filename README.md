@@ -12,7 +12,7 @@ The marketing site of **HyberTec LLC**, a software studio that designs and build
 | Motion | [motion](https://motion.dev) (scroll reveals, process timeline, 3D business cards) · [Lenis](https://lenis.darkroom.engineering) smooth scroll |
 | Hero | [Paper Shaders](https://shaders.paper.design) `LiquidMetal` rendering the official HT mark as live liquid chrome (WebGL) |
 | Fonts | Geist + Geist Mono via `next/font` |
-| Contact | [Web3Forms](https://web3forms.com) (client-side POST, no server needed) |
+| Contact | HyberMan, HyberTec's CRM (`POST /api/lead`), with an email fallback |
 
 Light is the default theme, whatever the visitor's system setting; the header toggle switches to dark and the choice is remembered. The first visit of a session plays a short logo intro that is skipped on repeat visits and for `prefers-reduced-motion`.
 
@@ -78,7 +78,13 @@ Everything on the homepage, `/work` and the case-study pages comes from `src/con
 
 ## Contact form
 
-The form is on `/contact/` and posts to Web3Forms. Create a free access key at [web3forms.com](https://web3forms.com) for the inbox that should receive leads, then add it in GitHub → **Settings → Secrets and variables → Actions → Variables** as `WEB3FORMS_ACCESS_KEY`. Locally, put `NEXT_PUBLIC_WEB3FORMS_KEY=...` in `.env.local`. Without a key the form falls back to opening the visitor's email client addressed to `hybertecofficial@gmail.com` (`site.email` in `src/content/site.ts`; the legal pages keep `billing@hybertec.com` for billing questions).
+The form on `/contact/` sends each inquiry to HyberMan, HyberTec's CRM (`POST https://hyberman.web.app/api/lead`; see `docs/WEBSITE.md` in the HyberMan repository). The inquiry lands in the CRM pipeline, and both founders get an email with the visitor as the reply-to address (HyberMan → Settings → "Inquiry emails"). If the CRM can't be reached, the form opens the visitor's email app addressed to `hybertecofficial@gmail.com` (`site.email` in `src/content/site.ts`) instead.
+
+The live API only accepts requests from `www.hybertec.com`, so the form on a local copy of this site falls back to email. To try the real flow on your computer, run HyberMan's emulators (`npm run dev` in HyberMan; nothing is emailed, messages land in its outbox) and start this site with:
+
+```bash
+NEXT_PUBLIC_CRM_API=http://localhost:5173/api npm run dev
+```
 
 ## Founders' business cards
 

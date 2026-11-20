@@ -229,7 +229,7 @@ export const privacy: LegalDoc = {
     "What personal data HyberTec collects through hybertec.com and the billing portal, why, who processes it and how to ask us to see, correct or delete it.",
   intro:
     "What we collect, why we collect it and what you can ask us to do with it. This policy covers this website and our billing portal.",
-  updated: "2026-11-11",
+  updated: "2026-11-20",
   summary: [
     "This website uses no cookies, analytics or ads.",
     "Card and bank details go straight to Stripe. We never see your full card or bank account number.",
@@ -265,10 +265,9 @@ export const privacy: LegalDoc = {
       id: "contacting-us",
       title: "Contacting us",
       body: [
-        "When you email us or use our contact form, we receive what you send. That's usually your name, email address, company and message.",
-        "Right now, our contact form opens your own email app with your message filled in. You then send it to us as a normal email.",
-        "If we start using a form service to deliver form messages, that service will receive what you type and pass it on to us. We'll update this policy when that happens.",
-        "We use your message to reply and to discuss your project. Our email runs on Google Workspace.",
+        "When you email us or use our contact form, we receive what you send. That's usually your name, email address, company, what you need help with and your message.",
+        "Our contact form sends what you type to our own client system, which runs on Google Firebase. It saves your message with your contact details and emails it to our founders. If the form can't reach that system, it opens your own email app with your message filled in instead, and you send it to us as a normal email.",
+        "We use your message to reply and to discuss your project. Our email runs on Gmail and Google Workspace.",
       ],
     },
     {
@@ -308,7 +307,7 @@ export const privacy: LegalDoc = {
       body: [
         "These service providers help us run HyberTec. Each one handles data under its own terms and privacy policy:",
         [
-          "Google: Firebase runs the billing portal, and Google Workspace runs our email. See [Google's Privacy Policy](https://policies.google.com/privacy).",
+          "Google: Firebase runs the billing portal and the client system that receives contact-form messages, and Gmail and Google Workspace run our email. See [Google's Privacy Policy](https://policies.google.com/privacy).",
           "Stripe: processes payments. See [Stripe's Privacy Policy](https://stripe.com/privacy).",
           "GitHub: hosts this website. See [GitHub's privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).",
         ],
@@ -352,7 +351,7 @@ export const privacy: LegalDoc = {
       id: "changes",
       title: "Changes to this policy",
       body: [
-        "We'll update this policy when our practices change, for example if we start using a form service. The date at the top of this page shows when it last changed.",
+        "We'll update this policy when our practices change, for example if we change how the contact form works. The date at the top of this page shows when it last changed.",
         "If a change matters for clients with an active plan, we'll email them.",
       ],
     },

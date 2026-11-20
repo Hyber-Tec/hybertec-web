@@ -14,13 +14,21 @@ import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 /**
- * Web3Forms public access key (safe to expose — it only allows submissions).
- * Set NEXT_PUBLIC_WEB3FORMS_KEY at build time; without it the form falls back
- * to opening the visitor's email client with the message pre-filled.
+ * Inquiries go to HyberMan, HyberTec's CRM (`POST /api/lead`, see HyberMan's
+ * docs/WEBSITE.md): each one lands in the pipeline and emails both founders,
+ * with the visitor as the reply-to address. Set NEXT_PUBLIC_CRM_API to send
+ * them elsewhere, e.g. http://localhost:5173/api for HyberMan's emulators
+ * (`npm run dev` there). The live API only accepts www.hybertec.com, so a
+ * local copy of this site falls back to the visitor's email app.
  */
-const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+const CRM_API = process.env.NEXT_PUBLIC_CRM_API || "https://hyberman.web.app/api";
+
+/** How long to wait for the CRM before falling back to the visitor's email app. */
+const TIMEOUT_MS = 20_000;
 
 type Status = "idle" | "sending" | "sent" | "error";
+
+type LeadResponse = { ok?: boolean; error?: string; code?: string };
 
 const field =
   "h-11 rounded-xl bg-background/60 px-3.5 text-[0.9375rem] md:text-sm dark:bg-background/40 border-border focus-visible:ring-foreground/15 focus-visible:border-foreground/40";
@@ -34,46 +42,77 @@ export function ContactForm({ className }: { className?: string }) {
     setTypes((current) => (current.includes(type) ? current.filter((t) => t !== type) : [...current, type]));
   }
 
+  /** Opens the visitor's email app with the inquiry written out, addressed to us. */
+  function openEmail(data: FormData, name: string) {
+    const lines = [
+      `Name: ${name}`,
+      `Company: ${data.get("company") || "—"}`,
+      `Project: ${types.join(", ") || "Not specified"}`,
+      `Timeline: ${data.get("timeline") || "—"}`,
+      "",
+      String(data.get("message") ?? ""),
+    ];
+    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(`Project inquiry — ${name}`)}&body=${encodeURIComponent(lines.join("\n"))}`;
+  }
+
+  /** The CRM couldn't take the inquiry: say so, and hand it to the visitor's email app. */
+  function fallBackToEmail(data: FormData, name: string) {
+    setStatus("error");
+    setError(`We couldn't send this from the page, so we opened it in your email app. Press Send there, or email us at ${site.email}.`);
+    openEmail(data, name);
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
     const name = String(data.get("name") ?? "").trim();
-    data.set("project_type", types.join(", ") || "Not specified");
-
-    if (!ACCESS_KEY) {
-      const lines = [
-        `Name: ${name}`,
-        `Company: ${data.get("company") || "—"}`,
-        `Project: ${data.get("project_type")}`,
-        `Timeline: ${data.get("timeline") || "—"}`,
-        "",
-        String(data.get("message") ?? ""),
-      ];
-      window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(`Project inquiry — ${name}`)}&body=${encodeURIComponent(lines.join("\n"))}`;
-      return;
-    }
 
     setStatus("sending");
     setError(null);
-    data.set("access_key", ACCESS_KEY);
-    data.set("subject", `New project inquiry — ${name || "website"}`);
-    data.set("from_name", "hybertec.com");
 
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+    let response: Response;
+    let result: LeadResponse;
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      response = await fetch(`${CRM_API}/lead`, {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: data,
+        headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
+        body: JSON.stringify({
+          name,
+          email: data.get("email"),
+          company: data.get("company"),
+          services: types,
+          timeline: data.get("timeline"),
+          message: data.get("message"),
+          botcheck: data.get("botcheck") ?? "", // the hidden checkbox: only bots tick it
+          ms: Math.round(performance.now()), // how long the page has been open (spam check)
+        }),
       });
-      const result = await response.json();
-      if (!result.success) throw new Error(result.message);
+      result = await response.json().catch(() => ({}));
+    } catch {
+      // Offline, blocked or too slow.
+      fallBackToEmail(data, name);
+      return;
+    } finally {
+      clearTimeout(timer);
+    }
+
+    if (response.ok && result.ok) {
       setStatus("sent");
       form.reset();
       setTypes([]);
-    } catch (err) {
+    } else if (response.status === 429) {
       setStatus("error");
-      setError(err instanceof Error && err.message ? err.message : "Something went wrong. Please try again.");
+      setError(`That's a lot of messages in a short time. Please email us at ${site.email}.`);
+    } else if (response.status === 400 && result.error) {
+      // The CRM writes these for the visitor, e.g. "That email doesn't look right."
+      setStatus("error");
+      setError(result.error);
+    } else {
+      fallBackToEmail(data, name);
     }
   }
 
