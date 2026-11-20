@@ -18,7 +18,9 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
-        // HyberTec brand CTAs: pure foreground fill, and a hairline outline.
+        // HyberTec CTAs: the accent for the main action on a screen, a
+        // foreground fill for secondary emphasis, and a hairline outline.
+        brand: "bg-brand text-brand-foreground hover:bg-brand/88",
         solid: "bg-foreground text-background hover:bg-foreground/85",
         line: "border-border bg-transparent text-foreground hover:border-foreground/30 hover:bg-foreground/[0.04]",
       },

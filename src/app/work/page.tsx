@@ -1,30 +1,27 @@
-import type { Metadata } from "next";
-
 import { PageHeader } from "@/components/page-header";
-import { Contact } from "@/components/sections/contact";
-import { WorkGrid } from "@/components/work/work-grid";
-import { projects } from "@/content/projects";
+import { CtaPanel } from "@/components/sections/cta-panel";
+import { ProjectRow } from "@/components/work/project-row";
+import { projects, workIntro } from "@/content/projects";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  description:
-    "Selected HyberTec work: vertical SaaS, CRMs, member platforms, construction tech and brand websites — designed and engineered in-house.",
-  alternates: { canonical: "/work/" },
-};
+export const metadata = pageMetadata({
+  title: "Work",
+  description: workIntro.metaDescription,
+  path: "/work/",
+});
 
 export default function WorkPage() {
   return (
     <>
-      <PageHeader
-        label="Work"
-        title={["Selected work."]}
-        description={`${projects.length} products designed, engineered and shipped by HyberTec — from vertical SaaS and member platforms to construction tech and brand sites.`}
-      />
-      <section className="pb-24 sm:pb-32">
+      <PageHeader label="Work" title={workIntro.title} description={workIntro.description} />
+      <section className="pb-8">
         <div className="container-page">
-          <WorkGrid />
+          {projects.map((project, i) => (
+            <ProjectRow key={project.slug} project={project} index={i} total={projects.length} flip={i % 2 === 1} priority={i === 0} />
+          ))}
         </div>
       </section>
-      <Contact />
+      <CtaPanel className="border-t border-hairline" />
     </>
   );
 }

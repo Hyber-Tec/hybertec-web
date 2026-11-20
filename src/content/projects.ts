@@ -28,9 +28,7 @@ export type Project = {
   name: string;
   /** One line under the name on cards. */
   tagline: string;
-  /** "We …" sentence describing what HyberTec delivered — the headline of showcase cards. */
-  outcome: string;
-  /** Two or three sentences for cards and the case-study intro. */
+  /** One or two sentences for the work page and the case-study intro. */
   summary: string;
   /** Industry or product category, e.g. "Construction tech". */
   category: string;
@@ -59,7 +57,7 @@ export type Project = {
     screens?: string[];
     gallery?: ProjectImage[];
   };
-  /** Shown in the homepage showcase, in this order. */
+  /** Shown on the homepage, in this order (the first three). */
   featured?: number;
   /** Options for `npm run capture`. Omit to capture `url` with defaults. */
   capture?: {
@@ -78,31 +76,29 @@ export const projects: Project[] = [
   {
     slug: "hybercrm",
     name: "Hyber CRM",
-    tagline: "The all-in-one CRM for tutoring centers.",
-    outcome:
-      "We built and run the operating system for tutoring centers — scheduling, clock-ins, payroll and parent reports in one platform, with tutor apps on iOS and Android.",
+    tagline: "A CRM built for tutoring centers.",
     summary:
-      "Our own vertical SaaS product. Scheduling, time clock and payroll, session logs, progress reports and portals for every role — one real-time platform that runs an entire tutoring center.",
+      "Our own SaaS product. Scheduling, time clock and payroll, session logs, progress reports and a portal for every role, in one real-time platform for tutoring centers.",
     category: "Vertical SaaS · Education",
     kind: "web-app",
     platforms: ["web", "ios", "android"],
     year: 2026,
     url: "https://hybercrm.com/",
     demo: { label: "Open live demo", href: "https://hybercrm.com/demo" },
-    services: ["Product strategy", "UI/UX design", "Full-stack engineering", "Cloud & hosting"],
+    services: ["Product strategy", "UI and UX design", "Full-stack engineering", "Hosting"],
     stack: ["React", "TypeScript", "Vite", "Firebase"],
     highlights: [
-      "Drag-and-drop live schedule with per-tutor lanes and conflict detection",
-      "Kiosk time clock with PIN, and payroll by pay period with rate history",
-      "Guided session logs — AI turns quick notes into clear sentences",
+      "Drag-and-drop live schedule with a lane per tutor and conflict detection",
+      "Kiosk time clock with PIN sign-in, and payroll by pay period with rate history",
+      "Guided session logs, with AI turning quick notes into clear sentences",
       "One-click progress reports with charts, drafted summaries and PDF export",
-      "Separate portals for owners, tutors, parents and students with role-based access",
-      "Multi-location support, white-label branding and a full audit log",
+      "Separate portals for owners, tutors, parents and students, with role-based access",
+      "Multiple locations, white-label branding and a full audit log",
     ],
     challenge:
-      "Tutoring centers juggle schedules, tutors, payroll and parent communication across disconnected tools. Hyber CRM set out to replace that patchwork with one system built around how a center actually runs.",
+      "Tutoring centers usually run on a patchwork of tools: one for scheduling, another for payroll, spreadsheets for session notes and email for parents. We wanted one system built around how a center actually runs.",
     approach:
-      "We designed one system around the center's real day: a live schedule that prevents conflicts, a time clock that feeds payroll, and session logs that roll up into parent-ready reports — with a public demo so prospects can try it before talking to sales.",
+      "We designed the product around a center's day. The live schedule prevents double-booking, the time clock feeds payroll, and session logs roll up into reports parents can read. A public demo lets prospects try it before they talk to anyone.",
     media: {
       desktop: "/work/hybercrm/desktop.webp",
       mobile: "/work/hybercrm/mobile.webp",
@@ -115,29 +111,27 @@ export const projects: Project[] = [
     slug: "takeoffprime",
     name: "TakeOffPrime",
     tagline: "From drawing sets to finished estimates.",
-    outcome:
-      "We turned large architectural drawing sets into unit counts, true-scale measurements and priced proposals — in one shared browser workspace.",
     summary:
-      "A browser workspace for construction estimators that turns large architectural PDF sets into unit counts, true-scale measurements and estimate proposals.",
+      "A browser workspace for construction estimators. It turns large architectural PDF sets into unit counts, true-scale measurements and estimate proposals.",
     category: "Construction tech",
     kind: "web-app",
     platforms: ["web"],
     year: 2026,
     url: "https://takeoffprime.com/",
-    services: ["UI/UX design", "Full-stack engineering", "Document processing", "Cloud & hosting"],
+    services: ["UI and UX design", "Full-stack engineering", "Document processing", "Hosting"],
     stack: ["React", "TypeScript", "Vite", "Firebase"],
     highlights: [
-      "Unit matrix: detect and count unit types straight from drawing sheets",
-      "Measure routed lengths at true drawing scale and roll them up per drawing set",
-      "Match regional pricing and sales-tax rates to produce estimate proposals",
-      "Team workspaces — upload once, review the same takeoff together",
+      "Unit matrix that detects and counts unit types straight from the drawing sheets",
+      "Routed lengths measured at true drawing scale and totaled per drawing set",
+      "Regional pricing and sales-tax rates matched to produce estimate proposals",
+      "Team workspaces: upload a set once and review the same takeoff together",
       "PDF drawing sets and Excel estimator workbooks in, Excel out",
       "Admin-approved accounts with Google or email sign-in",
     ],
     challenge:
-      "Counting units and measuring runs by hand across large drawing sets is slow, error-prone work that holds up every bid. The goal was to move the entire takeoff into one fast, shared workspace.",
+      "Counting units and measuring runs by hand across a large drawing set is slow and error-prone, and it holds up every bid. The estimators needed the whole takeoff in one shared place.",
     approach:
-      "We built a focused workspace that reads the drawing set, counts and measures at scale, and carries the numbers straight into pricing and a finished proposal, so the whole estimating flow lives in one place.",
+      "We built one workspace that reads the drawing set, counts and measures at scale, and carries the numbers into pricing and a finished proposal.",
     media: {
       desktop: "/work/takeoffprime/desktop.webp",
       gallery: [{ src: "/work/takeoffprime/desktop-light.webp", alt: "TakeOffPrime in light mode", frame: "browser" }],
@@ -149,10 +143,8 @@ export const projects: Project[] = [
     slug: "hg-profit-options",
     name: "HG Profit Options",
     tagline: "A membership platform for options-trading education.",
-    outcome:
-      "We built a members' platform for an options educator — live alerts, weekly strike targets, channel charts and a trading journal with CSV import.",
     summary:
-      "Marketing site and invite-only member area for a trading education program — real-time alerts, strike-price targets, channel charts, a trading journal and live classes.",
+      "A public site and an invite-only member area for a trading education program, with real-time alerts, strike-price targets, channel charts, a trading journal and live classes.",
     category: "Fintech · Education",
     kind: "web-app",
     platforms: ["web"],
@@ -165,12 +157,12 @@ export const projects: Project[] = [
       "Member dashboard with weekly strike-price targets and a channel ladder chart",
       "Trading journal with manual entry and CSV import, win rate and streaks",
       "Live class schedule, classroom community and a files library",
-      "Discovery-call booking funnel and complete legal pages",
+      "Booking flow for free discovery calls, and complete legal pages",
     ],
     challenge:
-      "Trading education depends on timely information. Members needed one place to receive alerts, study the method and track their own trades — and the program needed a front door that explains it clearly.",
+      "Trading education depends on timely information. Members needed one place to get alerts, study the method and track their own trades, and the program needed a public site that explains it clearly.",
     approach:
-      "We unified the program into a single member area with a clear marketing front door: alerts, targets, charts and the journal live together, and every page funnels new visitors toward a free call.",
+      "We put alerts, targets, charts and the journal into a single member area, and built a public site where every page leads to a free call.",
     media: {
       desktop: "/work/hg-profit-options/desktop.webp",
       mobile: "/work/hg-profit-options/mobile.webp",
@@ -182,10 +174,9 @@ export const projects: Project[] = [
   {
     slug: "jsong-realty",
     name: "JSong Realty",
-    tagline: "A luxury personal brand for an Atlanta REALTOR®.",
-    outcome: "We gave an Atlanta REALTOR® a brand presence that reads like an editorial, not a template.",
+    tagline: "A personal brand website for an Atlanta REALTOR®.",
     summary:
-      "An editorial, dark-luxury website for Joshua Song of Keller Williams Realty — featured listings, neighborhood expertise and a consultation path from every section.",
+      "An editorial website for Joshua Song of Keller Williams Realty, with featured listings, neighborhood knowledge and a way to book a consultation from every section.",
     category: "Real estate",
     kind: "website",
     platforms: ["web"],
@@ -196,14 +187,14 @@ export const projects: Project[] = [
     highlights: [
       "Editorial hero with serif display typography and an agent badge card",
       "Featured listings with price, specs and status, plus a full listings page",
-      "Value pillars, agent story and client reviews structured for trust",
-      "Consultation calls-to-action and contact paths from every section",
-      "Mobile-first build for buyers browsing on the go",
+      "Agent story, value points and client reviews",
+      "Consultation and contact links in every section",
+      "Built mobile-first for buyers browsing on their phones",
     ],
     challenge:
-      "In crowded Intown and Buckhead markets, the brief was a presence that matches the caliber of the homes — not another templated agent page.",
+      "Intown and Buckhead are crowded markets. The site had to match the homes Joshua sells and stand apart from the standard agent page.",
     approach:
-      "We created a distinctive editorial brand site with a restrained luxury palette, real typographic hierarchy and conversion paths that turn browsing buyers and sellers into consultations.",
+      "We built an editorial site with a restrained palette, serif display type and a clear path to a consultation from every section.",
     media: {
       desktop: "/work/jsong-realty/desktop.webp",
       mobile: "/work/jsong-realty/mobile.webp",
@@ -213,11 +204,9 @@ export const projects: Project[] = [
   {
     slug: "bibleprep",
     name: "Typing Bible",
-    tagline: "Read the whole Bible by typing it — together.",
-    outcome:
-      "We built a bilingual scripture-typing platform with minister-led group studies, rankings and a community board.",
+    tagline: "Read the whole Bible by typing it, together.",
     summary:
-      "A bilingual English and Korean community web app: type through Scripture verse by verse, keep one shared progress across translations, and join minister-led studies.",
+      "A bilingual English and Korean web app. Members type through Scripture verse by verse, keep one progress across translations and join studies led by ministers.",
     category: "Faith & community",
     kind: "web-app",
     platforms: ["web"],
@@ -233,9 +222,9 @@ export const projects: Project[] = [
       "Community board for notices, testimonies and questions",
     ],
     challenge:
-      "The goal: make reading the whole Bible an active, shared habit for bilingual English and Korean communities.",
+      "The goal was to make reading the whole Bible an active, shared habit for English- and Korean-speaking communities.",
     approach:
-      "We turned reading into an active, shared practice: typing locks in every verse, progress carries across languages, and studies and rankings keep whole communities moving together.",
+      "Typing each verse keeps readers engaged, progress carries across both languages, and group studies and rankings keep members reading together.",
     media: {
       desktop: "/work/bibleprep/desktop.webp",
       mobile: "/work/bibleprep/mobile.webp",
@@ -264,4 +253,13 @@ export const kindLabel: Record<ProjectKind, string> = {
   "web-app": "Web app",
   "mobile-app": "Mobile app",
   "desktop-app": "Desktop app",
+};
+
+/** Copy for the top of /work/. */
+export const workIntro = {
+  title: ["Selected work."],
+  description:
+    "Products we designed, built and launched, from SaaS platforms and member portals to a construction estimating tool and a real estate website.",
+  metaDescription:
+    "Projects HyberTec designed and built: SaaS platforms, member portals, a construction estimating tool and brand websites.",
 };

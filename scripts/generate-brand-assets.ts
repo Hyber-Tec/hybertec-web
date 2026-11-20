@@ -95,28 +95,27 @@ async function shareImage() {
   *{margin:0;box-sizing:border-box}
   body{width:1200px;height:630px;background:${INK};color:${PAPER};font-family:Geist,sans-serif;overflow:hidden;position:relative}
   .grid{position:absolute;inset:0;background-image:linear-gradient(to right,rgb(255 255 255/.06) 1px,transparent 1px),linear-gradient(to bottom,rgb(255 255 255/.06) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at 70% 45%,#000 20%,transparent 70%)}
-  .glow{position:absolute;inset:0;background:radial-gradient(45% 60% at 76% 42%,rgb(255 255 255/.10),transparent 70%)}
   .mark{position:absolute;right:96px;top:50%;height:500px;transform:translateY(-50%);filter:grayscale(1)}
   .content{position:absolute;left:80px;top:72px;bottom:72px;width:640px;display:flex;flex-direction:column}
   .lockup{display:flex;align-items:center;gap:18px}
   .lockup svg{height:44px;width:auto}
   .divider{width:1px;height:26px;background:rgb(255 255 255/.3)}
   .word{font-weight:600;font-size:21px;letter-spacing:.34em}
-  h1{margin-top:auto;font-weight:500;font-size:68px;line-height:1;letter-spacing:-.05em}
+  h1{margin-top:auto;font-weight:500;font-size:60px;line-height:1.02;letter-spacing:-.05em}
   h1 span{color:rgb(255 255 255/.5)}
   p{margin-top:24px;font-size:22px;line-height:1.4;color:rgb(255 255 255/.62);letter-spacing:-.01em}
   .meta{margin-top:auto;padding-top:28px;font-family:"Geist Mono",monospace;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgb(255 255 255/.5);display:flex;gap:28px}
 </style></head><body>
-<div class="grid"></div><div class="glow"></div>
+<div class="grid"></div>
 <img class="mark" src="data:image/png;base64,${chrome.toString("base64")}">
 <div class="content">
   <div class="lockup">
     <svg viewBox="${G.left} ${G.top} ${G.width} ${G.height}"><path d="${MARK_PATH}" fill="${PAPER}"/></svg>
     <span class="divider"></span><span class="word">HYBERTEC</span>
   </div>
-  <h1>Software that runs<br>your business.<br><span>Websites that<br>grow it.</span></h1>
-  <p>Websites, custom software, CRMs and iOS &amp; Android apps — designed and built under one roof.</p>
-  <div class="meta"><span>hybertec.com</span><span>Georgia, USA</span></div>
+  <h1>Websites, apps and<br>custom software<br><span>for growing businesses.</span></h1>
+  <p>One team designs, builds and supports your project, from the first call to long after launch.</p>
+  <div class="meta"><span>hybertec.com</span><span>Web · iOS · Android</span></div>
 </div>
 </body></html>`;
 

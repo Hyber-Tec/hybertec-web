@@ -5,25 +5,29 @@ export const site = {
   name: "HyberTec",
   legalName: "HyberTec LLC",
   url: "https://www.hybertec.com",
-  email: "billing@hybertec.com",
+  /** General contact address: shown on the site and used by the contact form's email fallback. */
+  email: "hybertecofficial@gmail.com",
+  /** Billing, refunds and privacy requests. Used by the legal pages only (content/legal.ts). */
+  billingEmail: "billing@hybertec.com",
+  /** Used by the legal pages only. The marketing pages don't show a location. */
   location: "Cumming, Georgia",
-  locationShort: "Georgia, USA",
   founded: 2026,
   responseTime: "1 business day",
-  tagline: "Software studio",
   description:
-    "HyberTec is a software studio that designs and engineers business websites, custom software, CRMs, and iOS and Android apps — from first sketch to production and beyond.",
+    "HyberTec is a software studio. We design, build and support business websites, custom software, CRMs, mobile apps and SaaS products.",
   socials: [{ label: "Instagram", handle: "@hybertecofficial", href: "https://www.instagram.com/hybertecofficial/" }],
 } as const;
 
 export type NavItem = { label: string; href: string };
 
+/** Every page in the header and footer. The header highlights the current one. */
 export const mainNav: NavItem[] = [
   { label: "Work", href: "/work/" },
-  { label: "Services", href: "/#services" },
-  { label: "Studio", href: "/#studio" },
-  { label: "Process", href: "/#process" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "Services", href: "/services/" },
+  { label: "Studio", href: "/studio/" },
+  { label: "Process", href: "/process/" },
+  { label: "FAQ", href: "/faq/" },
+  { label: "Contact", href: "/contact/" },
 ];
 
 /** Small links in the footer's bottom bar. Page copy lives in content/legal.ts. */
@@ -32,3 +36,11 @@ export const legalNav: NavItem[] = [
   { label: "Privacy", href: "/privacy/" },
   { label: "Refunds", href: "/refunds/" },
 ];
+
+/** True when `href` is the current page or a page under it (/work/ for /work/hybercrm/). */
+export function isCurrent(pathname: string, href: string) {
+  const strip = (p: string) => p.replace(/\/+$/, "") || "/";
+  const path = strip(pathname);
+  const target = strip(href);
+  return target === "/" ? path === "/" : path === target || path.startsWith(`${target}/`);
+}

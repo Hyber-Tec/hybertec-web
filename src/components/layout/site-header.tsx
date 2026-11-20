@@ -10,7 +10,7 @@ import { SmartLink } from "@/components/smart-link";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { mainNav, site } from "@/content/site";
+import { isCurrent, mainNav, site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
@@ -28,7 +28,7 @@ export function SiteHeader() {
           className={cn(
             "mx-auto flex items-center justify-between border transition-[max-width,height,padding,background-color,border-color,border-radius,box-shadow] duration-500 ease-out",
             scrolled
-              ? "h-14 max-w-5xl rounded-full border-border bg-background/70 py-0 pr-2 pl-5 shadow-[0_12px_40px_-16px_rgb(0_0_0/0.45)] backdrop-blur-xl"
+              ? "h-14 max-w-5xl rounded-full border-border bg-background/80 py-0 pr-2 pl-5 shadow-[0_12px_40px_-18px_rgb(0_0_0/0.28)] backdrop-blur-xl"
               : "h-[4.5rem] max-w-[82rem] rounded-none border-transparent bg-transparent px-5 sm:px-8 lg:px-12",
           )}
         >
@@ -38,7 +38,7 @@ export function SiteHeader() {
 
           <nav aria-label="Primary" className="hidden items-center lg:flex" onMouseLeave={() => setHovered(null)}>
             {mainNav.map((item) => {
-              const active = item.href === "/work/" && pathname.startsWith("/work");
+              const active = isCurrent(pathname, item.href);
               return (
                 <SmartLink
                   key={item.href}
@@ -46,18 +46,19 @@ export function SiteHeader() {
                   onMouseEnter={() => setHovered(item.href)}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "relative rounded-full px-4 py-2 text-sm transition-colors",
-                    active ? "text-foreground" : "text-muted-foreground hover:text-foreground",
+                    "relative rounded-full px-3.5 py-2 text-sm transition-colors",
+                    active ? "font-medium text-brand" : "text-muted-foreground hover:text-foreground",
                   )}
                 >
                   {hovered === item.href && (
                     <motion.span
                       layoutId="nav-hover"
-                      className="absolute inset-0 rounded-full bg-foreground/[0.07]"
+                      className="absolute inset-0 rounded-full bg-foreground/[0.06]"
                       transition={{ type: "spring", bounce: 0.18, duration: 0.5 }}
                     />
                   )}
                   <span className="relative">{item.label}</span>
+                  {active && <span aria-hidden className="absolute bottom-0.5 left-1/2 size-1 -translate-x-1/2 rounded-full bg-brand" />}
                 </SmartLink>
               );
             })}
@@ -65,7 +66,7 @@ export function SiteHeader() {
 
           <div className="flex items-center gap-1.5">
             <ThemeToggle />
-            <Button asChild variant="solid" size="pill-sm" className="hidden sm:inline-flex">
+            <Button asChild variant="brand" size="pill-sm" className="hidden sm:inline-flex">
               <SmartLink href="/contact/">
                 Start a project
                 <LuArrowUpRight data-icon="inline-end" className="transition-transform duration-300 group-hover/button:translate-x-0.5 group-hover/button:-translate-y-0.5" />
@@ -92,28 +93,34 @@ function MobileMenu({ pathname }: { pathname: string }) {
         </button>
       </SheetTrigger>
       <SheetContent side="right" className="w-full max-w-none border-l-border p-0 data-[side=right]:sm:max-w-md">
-        <div className="flex h-full flex-col px-6 pt-20 pb-8">
+        <div className="flex h-full flex-col overflow-y-auto px-6 pt-20 pb-8">
           <SheetTitle className="sr-only">Menu</SheetTitle>
-          <SheetDescription className="eyebrow">Navigate</SheetDescription>
+          <SheetDescription className="eyebrow">Menu</SheetDescription>
           <nav aria-label="Mobile" className="mt-6 flex flex-col">
-            {[{ label: "Home", href: "/" }, ...mainNav].map((item, i) => (
-              <SheetClose asChild key={item.href}>
-                <SmartLink
-                  href={item.href}
-                  className={cn(
-                    "flex items-baseline justify-between border-b border-hairline py-4 text-3xl font-medium tracking-[-0.03em] transition-colors hover:text-muted-foreground",
-                    item.href === "/work/" && pathname.startsWith("/work") && "text-muted-foreground",
-                  )}
-                >
-                  {item.label}
-                  <span className="font-mono text-xs text-muted-foreground">{String(i).padStart(2, "0")}</span>
-                </SmartLink>
-              </SheetClose>
-            ))}
+            {[{ label: "Home", href: "/" }, ...mainNav].map((item, i) => {
+              const active = isCurrent(pathname, item.href);
+              return (
+                <SheetClose asChild key={item.href}>
+                  <SmartLink
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "flex items-baseline justify-between border-b border-hairline py-3.5 text-[1.75rem] font-medium tracking-[-0.03em] transition-colors",
+                      active ? "text-brand" : "hover:text-muted-foreground",
+                    )}
+                  >
+                    {item.label}
+                    <span className={cn("font-mono text-xs", active ? "text-brand" : "text-muted-foreground")}>
+                      {String(i).padStart(2, "0")}
+                    </span>
+                  </SmartLink>
+                </SheetClose>
+              );
+            })}
           </nav>
-          <div className="mt-auto space-y-4">
+          <div className="mt-auto space-y-4 pt-10">
             <SheetClose asChild>
-              <Button asChild variant="solid" size="pill" className="w-full">
+              <Button asChild variant="brand" size="pill" className="w-full">
                 <SmartLink href="/contact/">
                   Start a project <LuArrowUpRight data-icon="inline-end" />
                 </SmartLink>

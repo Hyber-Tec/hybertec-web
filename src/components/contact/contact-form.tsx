@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { projectTypes, timelines } from "@/content/home";
+import { projectTypes, timelines } from "@/content/contact";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
@@ -92,7 +92,7 @@ export function ContactForm({ className }: { className?: string }) {
             </span>
             <h3 className="mt-6 text-2xl font-medium tracking-[-0.03em]">Message received.</h3>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Thank you — we&apos;ll review your project and reply within {site.responseTime}.
+              Thanks. We&apos;ll read it and reply within {site.responseTime}.
             </p>
             <button
               type="button"
@@ -166,7 +166,7 @@ export function ContactForm({ className }: { className?: string }) {
                 name="message"
                 required
                 rows={5}
-                placeholder="What are you building, who is it for, and what does success look like?"
+                placeholder="What are you building, and who is it for? Add any deadline or links to examples."
                 className={cn(field, "min-h-36 resize-none py-3")}
               />
             </FormField>
@@ -178,7 +178,7 @@ export function ContactForm({ className }: { className?: string }) {
             )}
 
             <div className="flex flex-col-reverse items-start justify-between gap-4 pt-2 sm:flex-row sm:items-center">
-              <p className="text-xs text-muted-foreground">We reply within {site.responseTime}. No spam, ever.</p>
+              <p className="text-xs text-muted-foreground">We reply within {site.responseTime}.</p>
               <Button type="submit" variant="solid" size="pill" disabled={status === "sending"}>
                 {status === "sending" ? (
                   <>

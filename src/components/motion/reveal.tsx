@@ -1,9 +1,7 @@
 "use client";
 
 import { motion, type HTMLMotionProps } from "motion/react";
-import { Children, type ReactNode } from "react";
-
-import { cn } from "@/lib/utils";
+import type { ReactNode } from "react";
 
 export const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
@@ -28,42 +26,6 @@ export function Reveal({ children, delay = 0, y = 28, amount = 0.25, blur = fals
       {...props}
     >
       {children}
-    </motion.div>
-  );
-}
-
-type StaggerProps = {
-  children: ReactNode;
-  className?: string;
-  itemClassName?: string;
-  stagger?: number;
-  delay?: number;
-  y?: number;
-  amount?: number;
-};
-
-/** Reveals each direct child in sequence once the group scrolls into view. */
-export function Stagger({ children, className, itemClassName, stagger = 0.08, delay = 0, y = 24, amount = 0.15 }: StaggerProps) {
-  return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount }}
-      transition={{ staggerChildren: stagger, delayChildren: delay }}
-    >
-      {Children.toArray(children).map((child, i) => (
-        <motion.div
-          key={i}
-          className={cn(itemClassName)}
-          variants={{
-            hidden: { opacity: 0, y },
-            show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE_OUT } },
-          }}
-        >
-          {child}
-        </motion.div>
-      ))}
     </motion.div>
   );
 }

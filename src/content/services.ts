@@ -1,159 +1,128 @@
 import type { IconType } from "react-icons";
-import {
-  LuBot,
-  LuCalendarCheck,
-  LuChartColumn,
-  LuCloud,
-  LuCode,
-  LuGauge,
-  LuLayers,
-  LuLayoutDashboard,
-  LuLifeBuoy,
-  LuMonitor,
-  LuPenTool,
-  LuPlug,
-  LuRocket,
-  LuShoppingBag,
-  LuSmartphone,
-  LuUsers,
-} from "react-icons/lu";
+import { LuLayers, LuLayoutDashboard, LuMonitor, LuRocket, LuSmartphone, LuUsers } from "react-icons/lu";
 
 export type Service = {
+  /** Anchor on the services page: /services/#<slug> */
   slug: string;
   title: string;
+  /** One line for the homepage. */
+  short: string;
+  /** Two or three sentences for the services page. */
   summary: string;
+  /** What the client gets. */
   deliverables: string[];
+  /** Slug of a project in content/projects.ts shown as an example. */
+  example?: string;
   icon: IconType;
 };
 
+/** The six services HyberTec offers, in the order the site shows them. */
 export const services: Service[] = [
   {
     slug: "websites",
     title: "Business websites",
+    short: "Clear, fast websites that explain what you do and bring in inquiries.",
     summary:
-      "Modern marketing sites for businesses that need to look credible, explain their offer clearly, and convert more visitors into leads.",
-    deliverables: ["Brand-grade design", "CMS you can edit", "SEO & analytics setup", "Sub-second page loads"],
+      "A website that explains what you do, loads quickly and makes it easy to get in touch. We plan the pages with you, design each one and set the site up so your team can edit the content.",
+    deliverables: ["Custom design", "Content your team can edit", "SEO and analytics setup", "Fast, accessible pages"],
+    example: "jsong-realty",
     icon: LuMonitor,
   },
   {
     slug: "custom-software",
     title: "Custom software",
+    short: "Portals, dashboards and internal tools that replace spreadsheets and manual work.",
     summary:
-      "Client portals, internal dashboards, intake workflows, and operational tools that replace spreadsheets and cut the manual back-and-forth.",
-    deliverables: ["Client & partner portals", "Admin dashboards", "Workflow automation", "Role-based access"],
+      "Client portals, admin dashboards and internal tools built around the way your team already works. The goal is less copying between spreadsheets, fewer emails back and forth and fewer manual steps.",
+    deliverables: ["Client and partner portals", "Admin dashboards", "Workflow automation", "Role-based access"],
+    example: "takeoffprime",
     icon: LuLayoutDashboard,
   },
   {
-    slug: "overflow",
-    title: "Freelance overflow support",
-    summary:
-      "A reliable execution partner when requests keep piling up — we take on design and development work and deliver it to your standard, under your brand if needed.",
-    deliverables: ["White-label delivery", "Design & development", "Fast turnaround", "Clear async updates"],
-    icon: LuLayers,
-  },
-  {
     slug: "crm",
-    title: "CRM & business systems",
+    title: "CRMs",
+    short: "Customer records, pipelines, quotes and reports, set up around how you sell.",
     summary:
-      "Pipelines, customer records, quoting, and reporting shaped around how your team actually sells — not how an off-the-shelf tool assumes you do.",
-    deliverables: ["Sales pipelines", "Customer database", "Quotes & invoicing", "Reporting dashboards"],
+      "A CRM shaped around your sales process instead of a generic one. Customer records, pipelines, quotes, invoices and reports in one place, with the right access for each role.",
+    deliverables: ["Sales pipelines", "Customer database", "Quotes and invoicing", "Reporting dashboards"],
+    example: "hybercrm",
     icon: LuUsers,
   },
   {
     slug: "mobile-apps",
-    title: "iOS & Android apps",
+    title: "iOS and Android apps",
+    short: "One codebase for iPhone and Android, released on the App Store and Google Play.",
     summary:
-      "Native-quality mobile apps from a single codebase, designed for real-world use and shipped through the App Store and Google Play.",
-    deliverables: ["iOS & Android builds", "Push notifications", "Offline-ready data", "Store submission"],
+      "Apps for iPhone and Android built from one codebase, so both stay in step. We handle the App Store and Google Play submission and review.",
+    deliverables: ["iOS and Android builds", "Push notifications", "Offline support", "Store submission"],
     icon: LuSmartphone,
   },
   {
     slug: "web-apps",
-    title: "Web apps & SaaS products",
+    title: "Web apps and SaaS",
+    short: "Products people sign in to and pay for, with an admin side for you.",
     summary:
-      "From MVP to multi-tenant platform: authentication, billing, data models, and an interface people enjoy using every day.",
-    deliverables: ["MVP in weeks", "Auth & subscriptions", "Scalable data models", "Product analytics"],
+      "Software you sell or run online. We build the accounts, subscriptions, data model and admin tools, starting with a first version you can put in front of customers.",
+    deliverables: ["A first version to launch", "Sign-in and subscriptions", "Data model and APIs", "Product analytics"],
+    example: "hg-profit-options",
     icon: LuRocket,
   },
   {
-    slug: "desktop-apps",
-    title: "Desktop applications",
+    slug: "overflow",
+    title: "Freelance overflow support",
+    short: "Extra design and development capacity for agencies and freelancers.",
     summary:
-      "Fast, local-first tools for Windows, macOS, and Linux when your workflow needs heavy files, offline work, or hardware access.",
-    deliverables: ["Cross-platform builds", "Local-first storage", "Auto-updates", "Installer & signing"],
-    icon: LuCode,
-  },
-  {
-    slug: "ecommerce",
-    title: "E-commerce",
-    summary:
-      "Storefronts and checkout flows built to sell — product catalogs, payments, inventory, and the integrations behind them.",
-    deliverables: ["Custom storefronts", "Stripe & payments", "Inventory sync", "Conversion tuning"],
-    icon: LuShoppingBag,
-  },
-  {
-    slug: "design",
-    title: "UI/UX & product design",
-    summary:
-      "Research-backed interface design, design systems, and interactive prototypes that make complex products feel simple.",
-    deliverables: ["UX flows & wireframes", "High-fidelity UI", "Design systems", "Clickable prototypes"],
-    icon: LuPenTool,
-  },
-  {
-    slug: "ai-automation",
-    title: "AI & automation",
-    summary:
-      "Practical AI features and automations — document processing, assistants, smart search, and workflows that run themselves.",
-    deliverables: ["LLM integrations", "Document extraction", "Smart search", "Workflow bots"],
-    icon: LuBot,
-  },
-  {
-    slug: "integrations",
-    title: "APIs & integrations",
-    summary:
-      "We connect the tools you already use — payments, calendars, email, accounting, and third-party APIs — into one reliable system.",
-    deliverables: ["REST & webhook APIs", "Third-party integrations", "Data migrations", "Sync jobs"],
-    icon: LuPlug,
-  },
-  {
-    slug: "cloud",
-    title: "Cloud, hosting & DevOps",
-    summary:
-      "Secure, observable infrastructure with automated deployments, backups, and monitoring so launches are boring in the best way.",
-    deliverables: ["CI/CD pipelines", "Cloud hosting", "Backups & monitoring", "Security hardening"],
-    icon: LuCloud,
-  },
-  {
-    slug: "data-reporting",
-    title: "Data & reporting",
-    summary:
-      "Dashboards, scheduled reports and data pipelines that turn the numbers you already collect into decisions your team can act on.",
-    deliverables: ["KPI dashboards", "Automated reports", "Data pipelines", "Exports & APIs"],
-    icon: LuChartColumn,
-  },
-  {
-    slug: "booking-scheduling",
-    title: "Booking & scheduling",
-    summary:
-      "Appointment booking, calendars, reminders and availability rules built into your website, portal or app — synced with the tools you use.",
-    deliverables: ["Online booking", "Calendar sync", "Reminders", "Availability rules"],
-    icon: LuCalendarCheck,
-  },
-  {
-    slug: "seo-performance",
-    title: "SEO & performance",
-    summary:
-      "Technical SEO, Core Web Vitals, and accessibility audits that make your site faster, easier to find, and usable by everyone.",
-    deliverables: ["Core Web Vitals", "Technical SEO", "Accessibility (WCAG)", "Analytics & tracking"],
-    icon: LuGauge,
-  },
-  {
-    slug: "support",
-    title: "Maintenance & support",
-    summary:
-      "Ongoing updates, new features, and dependable support after launch — one team that already knows your product inside out.",
-    deliverables: ["Monthly improvements", "Bug fixes & updates", "Uptime monitoring", "Priority response"],
-    icon: LuLifeBuoy,
+      "When your own pipeline is full, we take on design and development work and deliver it to your standard. We can work under your brand, in your tools, with updates you can forward to your client.",
+    deliverables: ["White-label delivery", "Design and development", "Your tools and workflow", "Clear written updates"],
+    icon: LuLayers,
   },
 ];
 
+/** Work that comes up inside most projects. */
+export const capabilities = [
+  { title: "Product and UI design", body: "User flows, wireframes, final screens and a clickable prototype before any code is written." },
+  { title: "Integrations and APIs", body: "Calendars, email, accounting and other services connected so data moves on its own." },
+  { title: "Payments and e-commerce", body: "Checkout, subscriptions and invoicing with Stripe, and product catalogs when you sell online." },
+  { title: "Booking and scheduling", body: "Online booking, calendar sync, reminders and availability rules." },
+  { title: "Data and reporting", body: "Dashboards, scheduled reports and exports from the data you already collect." },
+  { title: "AI features", body: "Drafting text, pulling data out of documents and search, where they save your team time." },
+  { title: "Desktop apps", body: "Windows, macOS and Linux apps for large files, offline work or local hardware." },
+  { title: "SEO and performance", body: "Technical SEO, page speed and accessibility checks." },
+  { title: "Hosting and maintenance", body: "Deployment, backups, monitoring, updates and fixes after launch." },
+];
+
+export const engagements = [
+  {
+    title: "Fixed-scope project",
+    lead: "A defined website, app or platform.",
+    body: "One price, one timeline and an itemized proposal, agreed before work starts. If you want to add something later, we quote it before we build it.",
+    bestFor: "New websites, first product versions, client portals, internal tools",
+    includes: ["Discovery and scope", "Design and engineering", "Launch and handover", "A fix period after launch"],
+  },
+  {
+    title: "Ongoing partnership",
+    lead: "A team for software that keeps changing.",
+    body: "A set amount of design and engineering time each month. You set the priorities, and we plan, build and release with regular demos.",
+    bestFor: "SaaS products, CRMs and internal platforms that keep growing",
+    includes: ["Monthly planning", "Regular releases", "Priority support", "Scale up, down or pause"],
+  },
+  {
+    title: "Overflow and white-label",
+    lead: "Extra hands when your pipeline is full.",
+    body: "We work inside your process and deliver under your brand. Your client deals with you, and you get a dependable team behind the work.",
+    bestFor: "Agencies, freelancers and in-house teams at capacity",
+    includes: ["NDA by default", "Your tools and workflow", "Client-ready updates", "Builds from your designs"],
+  },
+];
+
+export const engagementNote =
+  "Every engagement starts with a free call. Before any work begins, you get a written proposal with the scope and the price.";
+
+/** Copy for the top of /services/. */
+export const servicesIntro = {
+  title: ["What we build."],
+  description:
+    "Six kinds of work, all designed, built and supported in-house. Most projects combine a few of them, and the same team stays with you after launch.",
+  metaDescription:
+    "Business websites, custom software, CRMs, iOS and Android apps, web apps and SaaS products, and overflow support for agencies, from the HyberTec software studio.",
+};

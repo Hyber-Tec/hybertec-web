@@ -5,15 +5,20 @@ import { LuMoon, LuSun } from "react-icons/lu";
 
 import { cn } from "@/lib/utils";
 
+/** Browser UI color per theme; matches --background. */
+const THEME_COLOR = { light: "#ffffff", dark: "#0a0a0a" } as const;
+
 function applyTheme(theme: "light" | "dark") {
   document.documentElement.classList.toggle("dark", theme === "dark");
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", THEME_COLOR[theme]);
 }
 
 export function ThemeToggle({ className }: { className?: string }) {
-  // React's dev-mode remount resets <html> attributes; re-apply the saved choice.
+  // Light is the default. React's dev-mode remount resets <html> attributes,
+  // so re-apply a saved "dark" choice (a no-op in production).
   useLayoutEffect(() => {
     try {
-      if (localStorage.getItem("theme") === "light") applyTheme("light");
+      if (localStorage.getItem("theme") === "dark") applyTheme("dark");
     } catch {}
   }, []);
 

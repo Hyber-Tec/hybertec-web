@@ -31,6 +31,9 @@
   --color-hairline: var(--hairline);
   --color-surface: var(--surface);
   --color-surface-strong: var(--surface-strong);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-soft: var(--brand-soft);
 
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -43,45 +46,19 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 
-  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
-  --animate-marquee-reverse: marquee var(--marquee-duration, 40s) linear infinite reverse;
-  --animate-pulse-dot: pulse-dot 2.4s var(--ease-out-expo) infinite;
-  --animate-sheen: sheen 5s var(--ease-in-out-quart) infinite;
-
-  @keyframes marquee {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-    to {
-      transform: translate3d(calc(-100% - var(--marquee-gap, 3rem)), 0, 0);
-    }
-  }
-
-  @keyframes pulse-dot {
-    0% {
-      box-shadow: 0 0 0 0 color-mix(in oklch, currentColor 55%, transparent);
-    }
-    70%,
-    100% {
-      box-shadow: 0 0 0 7px transparent;
-    }
-  }
-
-  @keyframes sheen {
-    0%,
-    55% {
-      transform: translateX(-120%) skewX(-45deg);
-    }
-    100% {
-      transform: translateX(220%) skewX(-45deg);
-    }
-  }
 }
 
 /*
- * shadcn/ui neutral palette (https://ui.shadcn.com/colors).
- * Dark is the default theme: <html class="dark"> is server-rendered and
- * the inline script in layout.tsx only removes it for visitors who chose light.
+ * shadcn/ui neutral palette (https://ui.shadcn.com/colors). The site is black,
+ * white and gray: --brand marks the main button on a screen, links, the current
+ * page, the small mono index numbers and focus rings, and it is the ink color
+ * (black in light, white in dark). Keep it that way unless the owners pick a
+ * brand color; changing --brand here changes every one of those places.
+ *
+ * Light is the default theme. The boot script (components/theme/boot-script.ts)
+ * adds the `dark` class before first paint only for visitors who chose dark
+ * with the toggle. A `dark` class on any element also turns its subtree dark
+ * (used for the call-to-action panel).
  */
 :root {
   --radius: 0.75rem;
@@ -102,7 +79,10 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --brand: var(--foreground);
+  --brand-foreground: var(--background);
+  --brand-soft: color-mix(in oklch, var(--foreground) 6%, var(--background));
+  --ring: var(--brand);
   --hairline: oklch(0.145 0 0 / 8%);
   --surface: oklch(0.985 0 0);
   --surface-strong: oklch(0.97 0 0);
@@ -126,7 +106,10 @@
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --brand: var(--foreground);
+  --brand-foreground: var(--background);
+  --brand-soft: color-mix(in oklch, var(--foreground) 9%, var(--background));
+  --ring: var(--brand);
   --hairline: oklch(1 0 0 / 7%);
   --surface: oklch(1 0 0 / 2.5%);
   --surface-strong: oklch(1 0 0 / 5%);
@@ -207,21 +190,18 @@
   color: var(--muted-foreground);
 }
 
-@utility text-balance-pretty {
-  text-wrap: balance;
-}
+/* Inline text link. */
+@utility link {
+  color: var(--brand);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in oklch, var(--brand) 30%, transparent);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s;
 
-/* Brushed-silver headline fill; reads as chrome on dark, graphite on light. */
-@utility text-chrome {
-  background-image: linear-gradient(
-    180deg,
-    var(--foreground) 0%,
-    color-mix(in oklch, var(--foreground) 82%, transparent) 55%,
-    color-mix(in oklch, var(--foreground) 48%, transparent) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  &:hover {
+    text-decoration-color: var(--brand);
+  }
 }
 
 /* Faint blueprint grid, masked to fade at the edges. */
@@ -230,23 +210,6 @@
     linear-gradient(to right, var(--hairline) 1px, transparent 1px),
     linear-gradient(to bottom, var(--hairline) 1px, transparent 1px);
   background-size: 64px 64px;
-}
-
-/* 45° hatching, echoing the chamfered cuts of the HT mark. */
-@utility bg-hatch {
-  background-image: repeating-linear-gradient(
-    -45deg,
-    var(--hairline) 0 1px,
-    transparent 1px 9px
-  );
-}
-
-@utility mask-fade-x {
-  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-}
-
-@utility mask-fade-b {
-  mask-image: linear-gradient(to bottom, black 55%, transparent);
 }
 
 @utility mask-radial {

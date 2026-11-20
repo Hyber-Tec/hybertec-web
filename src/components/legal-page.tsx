@@ -1,7 +1,6 @@
-import type { ReactNode } from "react";
-
 import { enterDelay } from "@/components/motion/enter-text";
 import { PageHeader } from "@/components/page-header";
+import { Inline } from "@/components/rich-text";
 import { SmartLink } from "@/components/smart-link";
 import { FOUNDERS_TO_DECIDE, type LegalDoc } from "@/content/legal";
 import { cn } from "@/lib/utils";
@@ -34,7 +33,7 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
                 {doc.sections.map((section, i) => (
                   <li key={section.id}>
                     <SmartLink href={`#${section.id}`} className="flex gap-4 transition-colors hover:text-foreground">
-                      <span className="pt-px font-mono text-xs text-foreground/60">{number(i)}</span>
+                      <span className="pt-px font-mono text-xs text-brand">{number(i)}</span>
                       {section.title}
                     </SmartLink>
                   </li>
@@ -59,7 +58,7 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
                     className="scroll-mt-24 border-t border-border py-10 sm:py-12"
                   >
                     <h2 id={`${section.id}-title`} className="flex items-baseline gap-4 text-2xl font-medium tracking-[-0.03em]">
-                      <span aria-hidden className="font-mono text-xs font-normal tracking-normal text-muted-foreground">
+                      <span aria-hidden className="font-mono text-xs font-normal tracking-normal text-brand">
                         {number(i)}
                       </span>
                       {section.title}
@@ -98,42 +97,5 @@ function List({ items, className }: { items: string[]; className?: string }) {
         </li>
       ))}
     </ul>
-  );
-}
-
-/** `[label](href)` in the copy becomes a link. */
-const LINK = /\[([^\]]+)\]\(([^)\s]+)\)/;
-
-function Inline({ text }: { text: string }) {
-  // With two capture groups, split() returns [text, label, href, text, label, href, …, text].
-  const parts = text.split(LINK);
-  return parts.map((part, i) => {
-    if (i % 3 === 1) {
-      return (
-        <TextLink key={i} href={parts[i + 1]}>
-          {part}
-        </TextLink>
-      );
-    }
-    return i % 3 === 0 ? part : null;
-  });
-}
-
-const linkClass =
-  "text-foreground underline decoration-foreground/30 underline-offset-4 transition-colors hover:decoration-foreground";
-
-function TextLink({ href, children }: { href: string; children: ReactNode }) {
-  if (href.startsWith("/") || href.startsWith("#")) {
-    return (
-      <SmartLink href={href} className={linkClass}>
-        {children}
-      </SmartLink>
-    );
-  }
-  const external = href.startsWith("http");
-  return (
-    <a href={href} className={linkClass} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
-      {children}
-    </a>
   );
 }

@@ -1,78 +1,11 @@
-import type { IconType } from "react-icons";
-import { FaAws } from "react-icons/fa";
-import { RiOpenaiFill } from "react-icons/ri";
-import {
-  SiAndroid,
-  SiAnthropic,
-  SiApple,
-  SiAstro,
-  SiCloudflare,
-  SiDocker,
-  SiExpo,
-  SiFigma,
-  SiFirebase,
-  SiFlutter,
-  SiGithub,
-  SiGooglecloud,
-  SiGraphql,
-  SiKotlin,
-  SiMongodb,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiPostgresql,
-  SiPrisma,
-  SiPython,
-  SiReact,
-  SiRedis,
-  SiShopify,
-  SiStripe,
-  SiSupabase,
-  SiSwift,
-  SiTailwindcss,
-  SiTypescript,
-  SiVercel,
-  SiVite,
-} from "react-icons/si";
-
-export type Tech = { name: string; icon: IconType };
-
-/** Two rows for the technology marquee: product & frontend, then platform & infrastructure. */
-export const stackRows: Tech[][] = [
-  [
-    { name: "TypeScript", icon: SiTypescript },
-    { name: "React", icon: SiReact },
-    { name: "Next.js", icon: SiNextdotjs },
-    { name: "Astro", icon: SiAstro },
-    { name: "Vite", icon: SiVite },
-    { name: "Tailwind CSS", icon: SiTailwindcss },
-    { name: "React Native", icon: SiReact },
-    { name: "Expo", icon: SiExpo },
-    { name: "Swift", icon: SiSwift },
-    { name: "Kotlin", icon: SiKotlin },
-    { name: "Flutter", icon: SiFlutter },
-    { name: "Figma", icon: SiFigma },
-    { name: "iOS", icon: SiApple },
-    { name: "Android", icon: SiAndroid },
-  ],
-  [
-    { name: "Node.js", icon: SiNodedotjs },
-    { name: "Python", icon: SiPython },
-    { name: "PostgreSQL", icon: SiPostgresql },
-    { name: "Firebase", icon: SiFirebase },
-    { name: "Supabase", icon: SiSupabase },
-    { name: "Prisma", icon: SiPrisma },
-    { name: "GraphQL", icon: SiGraphql },
-    { name: "Redis", icon: SiRedis },
-    { name: "MongoDB", icon: SiMongodb },
-    { name: "Stripe", icon: SiStripe },
-    { name: "Shopify", icon: SiShopify },
-    { name: "AWS", icon: FaAws },
-    { name: "Google Cloud", icon: SiGooglecloud },
-    { name: "Vercel", icon: SiVercel },
-    { name: "Cloudflare", icon: SiCloudflare },
-    { name: "Docker", icon: SiDocker },
-    { name: "GitHub", icon: SiGithub },
-    { name: "OpenAI", icon: RiOpenaiFill },
-    { name: "Anthropic", icon: SiAnthropic },
-  ],
+/** Tools we use, grouped for the studio page. */
+export const stackGroups: { title: string; items: string[] }[] = [
+  { title: "Front end and design", items: ["TypeScript", "React", "Next.js", "Astro", "Vite", "Tailwind CSS", "Figma"] },
+  { title: "Mobile", items: ["React Native", "Expo", "Swift", "Kotlin", "Flutter"] },
+  {
+    title: "Back end and data",
+    items: ["Node.js", "Python", "PostgreSQL", "Firebase", "Supabase", "Prisma", "GraphQL", "Redis", "MongoDB"],
+  },
+  { title: "Cloud and hosting", items: ["Google Cloud", "AWS", "Vercel", "Cloudflare", "Docker", "GitHub"] },
+  { title: "Payments and AI", items: ["Stripe", "Shopify", "OpenAI", "Anthropic"] },
 ];

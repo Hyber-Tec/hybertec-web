@@ -8,13 +8,14 @@ import { BrowserFrame } from "@/components/mockups/browser-frame";
 import { PhoneFrame } from "@/components/mockups/phone-frame";
 import { Reveal } from "@/components/motion/reveal";
 import { EnterText, enterDelay } from "@/components/motion/enter-text";
-import { Contact } from "@/components/sections/contact";
+import { CtaPanel } from "@/components/sections/cta-panel";
 import { SmartLink } from "@/components/smart-link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { PlatformBadges } from "@/components/work/platform-badges";
 import { ProjectMockup } from "@/components/work/project-mockup";
 import { getProject, kindLabel, platformLabel, projects } from "@/content/projects";
+import { pageMetadata } from "@/lib/metadata";
 
 export const dynamicParams = false;
 
@@ -25,16 +26,12 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {
   const project = getProject((await params).slug);
   if (!project) return {};
-  return {
-    description: `${project.name} — ${project.tagline} ${project.summary}`,
-    alternates: { canonical: `/work/${project.slug}/` },
-    openGraph: {
-      title: `${project.name} — a HyberTec project`,
-      description: project.summary,
-      url: `/work/${project.slug}/`,
-      images: project.media.desktop ? [{ url: project.media.desktop }] : undefined,
-    },
-  };
+  return pageMetadata({
+    title: project.name,
+    description: `${project.tagline} ${project.summary}`,
+    path: `/work/${project.slug}/`,
+    image: project.media.desktop,
+  });
 }
 
 function hostname(url: string) {
@@ -71,8 +68,10 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
           <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-8">
-              <p className="eyebrow enter-up" style={enterDelay(0.05)}>
-                Case study · {String(index + 1).padStart(2, "0")}
+              <p className="eyebrow enter-up flex items-center gap-3" style={enterDelay(0.05)}>
+                <span className="text-brand">{String(index + 1).padStart(2, "0")}</span>
+                <span aria-hidden className="h-px w-8 bg-foreground/25" />
+                Case study
               </p>
               <EnterText
                 lines={[project.name]}
@@ -85,7 +84,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             </div>
             <div className="enter-up flex flex-wrap gap-3 lg:col-span-4 lg:justify-end" style={enterDelay(0.35)}>
               {project.url && (
-                <Button asChild variant="solid" size="pill-md">
+                <Button asChild variant="brand" size="pill-md">
                   <a href={project.url} target="_blank" rel="noopener noreferrer">
                     Visit {hostname(project.url)}
                     <LuArrowUpRight className="transition-transform duration-300 group-hover/button:translate-x-0.5 group-hover/button:-translate-y-0.5" />
@@ -119,10 +118,6 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
         <div className="enter-up container-page mt-14" style={enterDelay(0.5)}>
           <div className="bg-blueprint relative overflow-hidden rounded-3xl border border-border bg-neutral-100 px-[6%] pt-[6%] dark:bg-neutral-900">
-            <div
-              aria-hidden
-              className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_30%,color-mix(in_oklch,var(--foreground)_10%,transparent),transparent_75%)]"
-            />
             <ProjectMockup project={project} priority className="relative mx-auto max-w-5xl" />
           </div>
         </div>
@@ -157,7 +152,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             {project.highlights.map((highlight, i) => (
               <li key={highlight} className="border-b border-border">
                 <Reveal y={12} amount={0.6} className="flex gap-6 py-6">
-                  <span className="pt-1 font-mono text-xs text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="pt-1 font-mono text-xs text-brand">{String(i + 1).padStart(2, "0")}</span>
                   <p className="text-base leading-relaxed sm:text-lg">{highlight}</p>
                 </Reveal>
               </li>
@@ -166,7 +161,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
           <div className="mt-16 grid gap-10 sm:grid-cols-2">
             <Reveal>
-              <p className="eyebrow">What we delivered</p>
+              <p className="eyebrow">What we did</p>
               <ul className="mt-5 flex flex-wrap gap-2">
                 {project.services.map((service) => (
                   <li key={service}>
@@ -178,7 +173,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
               </ul>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="eyebrow">Technology</p>
+              <p className="eyebrow">Built with</p>
               <ul className="mt-5 flex flex-wrap gap-2">
                 {project.stack.map((tech) => (
                   <li key={tech}>
@@ -231,14 +226,14 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
               </p>
               <p className="mt-3 text-sm text-muted-foreground">{next.tagline}</p>
             </div>
-            <span className="flex size-14 shrink-0 items-center justify-center rounded-full border border-border transition-all duration-500 group-hover:border-foreground group-hover:bg-foreground group-hover:text-background sm:size-20">
+            <span className="flex size-14 shrink-0 items-center justify-center rounded-full border border-border transition-all duration-500 group-hover:border-brand group-hover:bg-brand group-hover:text-brand-foreground sm:size-20">
               <LuArrowRight className="size-5 transition-transform duration-500 group-hover:translate-x-1 sm:size-6" />
             </span>
           </div>
         </SmartLink>
       </section>
 
-      <Contact />
+      <CtaPanel className="border-t border-hairline" />
     </>
   );
 }

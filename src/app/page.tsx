@@ -1,27 +1,17 @@
-import { Contact } from "@/components/sections/contact";
-import { Engagement } from "@/components/sections/engagement";
-import { Faq } from "@/components/sections/faq";
+import { LegacyHashRedirect } from "@/components/legacy-hash-redirect";
+import { CtaPanel } from "@/components/sections/cta-panel";
+import { FeaturedWork } from "@/components/sections/featured-work";
 import { Hero } from "@/components/sections/hero";
-import { Process } from "@/components/sections/process";
-import { Services } from "@/components/sections/services";
-import { Shipped } from "@/components/sections/shipped";
-import { Stack } from "@/components/sections/stack";
-import { Studio } from "@/components/sections/studio";
-import { Work } from "@/components/sections/work";
+import { ServicesPreview } from "@/components/sections/services-preview";
 
 export default function HomePage() {
   return (
     <>
+      <LegacyHashRedirect />
       <Hero />
-      <Shipped />
-      <Work />
-      <Services />
-      <Studio />
-      <Process />
-      <Engagement />
-      <Stack />
-      <Faq />
-      <Contact index="08" />
+      <ServicesPreview index="01" />
+      <FeaturedWork index="02" />
+      <CtaPanel />
     </>
   );
 }

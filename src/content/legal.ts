@@ -40,7 +40,7 @@ export type LegalDoc = {
   sections: LegalSection[];
 };
 
-const billing = `[${site.email}](mailto:${site.email})`;
+const billing = `[${site.billingEmail}](mailto:${site.billingEmail})`;
 const portal = "billing.hybertec.com";
 const address = `${site.legalName}, ${site.location}, USA.`;
 

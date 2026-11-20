@@ -3,6 +3,7 @@ import { SiInstagram } from "react-icons/si";
 
 import { Logo } from "@/components/brand/logo";
 import { BackToTop } from "@/components/layout/back-to-top";
+import { FooterNav } from "@/components/layout/footer-nav";
 import { FooterWordmark } from "@/components/layout/footer-wordmark";
 import { SmartLink } from "@/components/smart-link";
 import { services } from "@/content/services";
@@ -14,53 +15,43 @@ export function SiteFooter() {
   return (
     <footer className="relative overflow-hidden border-t border-hairline">
       <div className="container-page">
-        <div className="grid gap-12 py-16 md:grid-cols-12 md:py-20">
-          <div className="md:col-span-5">
+        <div className="grid gap-12 py-16 md:grid-cols-12 md:gap-x-8 md:py-20">
+          <div className="md:col-span-12 lg:col-span-4">
             <Logo />
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">{site.description}</p>
-            <SmartLink
-              href="/contact/"
-              className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-foreground"
-            >
-              <span className="underline decoration-foreground/30 underline-offset-[6px] transition-colors group-hover:decoration-foreground">
+            <SmartLink href="/contact/" className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-brand">
+              <span className="underline decoration-brand/30 underline-offset-[6px] transition-colors group-hover:decoration-brand">
                 Start a project
               </span>
               <LuArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </SmartLink>
           </div>
 
-          <FooterColumn title="Studio" className="md:col-span-2">
-            {mainNav.map((item) => (
-              <li key={item.href}>
-                <SmartLink href={item.href} className="transition-colors hover:text-foreground">
-                  {item.label}
-                </SmartLink>
-              </li>
-            ))}
-            <li>
-              <SmartLink href="/contact/" className="transition-colors hover:text-foreground">
-                Contact
-              </SmartLink>
-            </li>
+          <FooterColumn title="Pages" className="md:col-span-3 lg:col-span-2">
+            <FooterNav items={mainNav} />
           </FooterColumn>
 
-          <FooterColumn title="Services" className="md:col-span-3">
-            {services.slice(0, 6).map((service) => (
+          <FooterColumn title="Services" className="md:col-span-5 lg:col-span-3">
+            {services.map((service) => (
               <li key={service.slug}>
-                <SmartLink href={`/#service-${service.slug}`} className="transition-colors hover:text-foreground">
+                <SmartLink href={`/services/#${service.slug}`} className="transition-colors hover:text-foreground">
                   {service.title}
                 </SmartLink>
               </li>
             ))}
           </FooterColumn>
 
-          <FooterColumn title="Contact" className="md:col-span-2">
+          <FooterColumn title="Contact" className="md:col-span-4 lg:col-span-3">
             <li>
               <a href={`mailto:${site.email}`} className="transition-colors hover:text-foreground">
                 {site.email}
               </a>
             </li>
-            <li>{site.location}</li>
+            <li>
+              <SmartLink href="/contact/#founders" className="transition-colors hover:text-foreground">
+                Talk to a founder
+              </SmartLink>
+            </li>
             {site.socials.map((social) => (
               <li key={social.href}>
                 <a
@@ -84,18 +75,12 @@ export function SiteFooter() {
             </p>
             <nav aria-label="Legal">
               <ul className="flex gap-5">
-                {legalNav.map((item) => (
-                  <li key={item.href}>
-                    <SmartLink href={item.href} className="transition-colors hover:text-foreground">
-                      {item.label}
-                    </SmartLink>
-                  </li>
-                ))}
+                <FooterNav items={legalNav} />
               </ul>
             </nav>
           </div>
           <div className="flex items-center justify-between gap-6">
-            <span className="hidden font-mono tracking-wider uppercase lg:inline">Designed &amp; engineered in-house</span>
+            <span className="hidden font-mono tracking-wider uppercase lg:inline">Designed and built in-house</span>
             <BackToTop />
           </div>
         </div>

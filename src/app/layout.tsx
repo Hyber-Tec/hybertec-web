@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import { BOOT_SCRIPT } from "@/components/theme/boot-script";
 import { site } from "@/content/site";
+import { shareImage } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
@@ -14,12 +15,12 @@ import "./globals.css";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-const title = "HyberTec LLC";
-const shareTitle = "HyberTec — Software that runs your business. Websites that grow it.";
+const defaultTitle = "HyberTec | Software studio";
+const shareTitle = "HyberTec | Websites, apps and custom software";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title,
+  title: { default: defaultTitle, template: `%s | ${site.name}` },
   description: site.description,
   applicationName: site.legalName,
   keywords: [
@@ -30,8 +31,8 @@ export const metadata: Metadata = {
     "mobile app development",
     "business websites",
     "white-label development",
-    "Atlanta software studio",
-    "Georgia web design",
+    "SaaS development",
+    "software studio",
   ],
   authors: [{ name: site.legalName, url: site.url }],
   creator: site.legalName,
@@ -43,20 +44,21 @@ export const metadata: Metadata = {
     locale: "en_US",
     title: shareTitle,
     description: site.description,
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "HyberTec — software studio" }],
+    images: [shareImage],
   },
   twitter: {
     card: "summary_large_image",
     title: shareTitle,
     description: site.description,
-    images: ["/og.png"],
+    images: [shareImage.url],
   },
   formatDetection: { telephone: false, address: false, email: false },
 };
 
+// Light is the default theme; the theme toggle updates theme-color for dark.
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
-  colorScheme: "dark light",
+  themeColor: "#ffffff",
+  colorScheme: "light",
 };
 
 const organizationJsonLd = {
@@ -68,13 +70,12 @@ const organizationJsonLd = {
   email: site.email,
   foundingDate: String(site.founded),
   description: site.description,
-  address: { "@type": "PostalAddress", addressRegion: "GA", addressCountry: "US" },
   sameAs: site.socials.map((social) => social.href),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={cn(geistSans.variable, geistMono.variable, "dark")} suppressHydrationWarning>
+    <html lang="en" className={cn(geistSans.variable, geistMono.variable)} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
       </head>
